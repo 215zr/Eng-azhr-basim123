@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>استمارة المهندس أزهر الإلكترونية</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#d4a017">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo','Segoe UI',Tahoma,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+:root{--gold:#d4a017;--gold-light:#f0c75e;--dark:#1a1410;--cream:#f5ecd7;--lapis:#1e3a8a;--lapis-light:#3b5bdb;--success:#10b981;--danger:#ef4444}
+html,body{overflow-x:hidden}
+body{background:linear-gradient(135deg,#1a1410 0%,#2a1f15 50%,#1a1410 100%);color:var(--cream);min-height:100vh;padding-bottom:90px}
+.bg-pattern{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden}
+.bg-pattern .sticker{position:absolute;opacity:.08;animation:float 8s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-20px) rotate(5deg)}}
+.sticker-1{top:5%;left:5%;width:120px}
+.sticker-2{top:15%;right:8%;width:100px}
+.sticker-3{top:35%;left:10%;width:90px}
+.sticker-4{top:55%;right:5%;width:130px}
+.sticker-5{top:75%;left:8%;width:110px}
+.sticker-6{top:90%;right:12%;width:95px}
+.sticker-7{top:45%;left:45%;width:150px;opacity:.05}
+header{position:relative;z-index:10;background:linear-gradient(135deg,rgba(30,58,138,.95),rgba(139,58,31,.95));border-bottom:3px solid var(--gold);padding:18px 16px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+header h1{font-size:1.15rem;font-weight:900;color:var(--gold-light);text-shadow:0 2px 8px rgba(0,0,0,.6)}
+header .subtitle{font-size:.75rem;color:var(--cream);opacity:.85;margin-top:4px}
+.header-decoration{display:flex;justify-content:center;gap:8px;margin-top:8px;font-size:.9rem;color:var(--gold)}
+.container{position:relative;z-index:5;padding:16px;max-width:640px;margin:0 auto}
+.card{background:rgba(42,31,21,.85);border:1px solid rgba(212,160,23,.3);border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.card-title{font-size:1rem;font-weight:700;color:var(--gold-light);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(212,160,23,.25);display:flex;align-items:center;gap:8px}
+.card-title .icon{font-size:1.2rem}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.85rem;font-weight:600;color:var(--cream);margin-bottom:6px}
+.field label .optional{color:var(--gold);font-size:.7rem;font-weight:400;opacity:.8}
+.field label .hint{color:var(--gold);font-size:.72rem;font-weight:700;display:inline-block}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;background:rgba(26,20,16,.7);border:1.5px solid rgba(212,160,23,.25);border-radius:10px;color:var(--cream);font-size:.9rem;font-family:'Cairo',Tahoma,Arial,sans-serif;transition:all .3s;-webkit-appearance:none;appearance:none}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23d4a017' d='M6 8L2 4h8z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;padding-left:36px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,160,23,.15)}
+.field input::placeholder,.field textarea::placeholder{color:rgba(245,236,215,.4)}
+.field textarea{resize:vertical;min-height:80px}
+.field input[readonly]{background:rgba(30,58,138,.2);border-color:rgba(59,91,219,.4);color:var(--gold-light);cursor:not-allowed}
+.field input.invalid-input{border-color:var(--danger);box-shadow:0 0 0 3px rgba(239,68,68,.2)}
+.sub-section{background:rgba(30,58,138,.15);border:1px dashed rgba(212,160,23,.35);border-radius:12px;padding:12px;margin-top:12px}
+.sub-section-title{font-size:.85rem;font-weight:700;color:var(--gold-light);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(212,160,23,.2)}
+.family-block{background:rgba(139,58,31,.12);border:1.5px solid rgba(212,160,23,.35);border-radius:14px;padding:14px;margin-bottom:16px}
+.family-header{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,rgba(30,58,138,.5),rgba(139,58,31,.5));padding:10px 12px;border-radius:10px;margin-bottom:12px}
+.family-title{font-weight:900;color:var(--gold-light);font-size:.95rem}
+.family-number{background:var(--gold);color:var(--dark);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.85rem}
+.member-block{background:rgba(30,58,138,.12);border:1px solid rgba(212,160,23,.2);border-radius:12px;padding:12px;margin-bottom:12px}
+.member-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.member-title{font-weight:700;color:var(--gold-light);font-size:.9rem}
+.member-number{background:var(--gold);color:var(--dark);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.8rem}
+.total-box{background:linear-gradient(135deg,rgba(16,185,129,.2),rgba(5,150,105,.2));border:1.5px solid var(--success);border-radius:10px;padding:10px 12px;margin-top:10px;text-align:center;font-weight:700;color:#6ee7b7}
+.grand-total{background:linear-gradient(135deg,rgba(212,160,23,.25),rgba(240,199,94,.25));border:2px solid var(--gold);border-radius:12px;padding:14px;margin-top:14px;text-align:center;font-weight:900;color:var(--gold-light);font-size:1rem}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-size:.95rem;font-weight:700;font-family:inherit;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--dark);box-shadow:0 6px 20px rgba(212,160,23,.4)}
+.btn-secondary{background:linear-gradient(135deg,var(--lapis),var(--lapis-light));color:#fff;box-shadow:0 6px 20px rgba(30,58,138,.4);margin-top:10px}
+.btn-new-family{background:linear-gradient(135deg,#059669,var(--success));color:#fff;box-shadow:0 6px 20px rgba(16,185,129,.4);margin-top:10px}
+.btn-security{background:linear-gradient(135deg,#7f1d1d,#991b1b);color:#fff;box-shadow:0 6px 20px rgba(153,27,27,.4);margin-top:10px}
+.btn-reports{background:linear-gradient(135deg,#6d28d9,#7c3aed);color:#fff;box-shadow:0 6px 20px rgba(124,58,237,.4);margin-top:10px}
+.btn-preview{background:linear-gradient(135deg,#0d9488,#14b8a6);color:#fff;box-shadow:0 6px 20px rgba(20,184,166,.4);margin-top:10px}
+.btn-search{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--dark);padding:12px;font-size:.9rem;margin-top:6px}
+.btn-row{display:flex;gap:10px;margin-top:10px}
+.btn-row .btn{flex:1}
+.notice{background:linear-gradient(135deg,rgba(139,58,31,.4),rgba(30,58,138,.4));border:1px solid rgba(212,160,23,.4);border-radius:12px;padding:14px;margin-top:16px;text-align:center;font-size:.78rem;line-height:1.6;color:var(--gold-light)}
+.notice .heart{color:var(--danger)}
+footer{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,rgba(26,20,16,.98),rgba(42,31,21,.98));border-top:2px solid var(--gold);padding:10px 16px;text-align:center;font-size:.7rem;color:var(--gold-light);z-index:100;line-height:1.5}
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:1000;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.active{display:flex}
+.modal{background:linear-gradient(135deg,#2a1f15,#1a1410);border:2px solid var(--gold);border-radius:20px;padding:20px;width:100%;max-width:520px;max-height:85vh;overflow-y:auto}
+.modal h2{color:var(--gold-light);font-size:1.1rem;margin-bottom:16px;text-align:center;padding-bottom:12px;border-bottom:1px solid rgba(212,160,23,.3)}
+.print-option{display:flex;align-items:center;gap:10px;padding:12px;background:rgba(26,20,16,.6);border:1.5px solid rgba(212,160,23,.2);border-radius:10px;margin-bottom:8px;cursor:pointer}
+.print-option input[type="radio"]{width:18px;height:18px;accent-color:var(--gold)}
+.print-option .label-text{font-size:.85rem;font-weight:600}
+.tri-toggle{display:flex;gap:6px;margin-top:6px}
+.tri-toggle label{flex:1;text-align:center;padding:6px;background:rgba(26,20,16,.6);border:1.5px solid rgba(212,160,23,.2);border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer}
+.tri-toggle input{display:none}
+.tri-toggle label.active{background:var(--gold);color:var(--dark);border-color:var(--gold)}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(100px);background:linear-gradient(135deg,var(--success),#059669);color:#fff;padding:12px 24px;border-radius:30px;font-size:.85rem;font-weight:600;z-index:2000;opacity:0;transition:all .4s;box-shadow:0 8px 24px rgba(16,185,129,.4);max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.error{background:linear-gradient(135deg,var(--danger),#991b1b)}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--lapis-light));z-index:999;width:0%;transition:width .3s}
+.saved-list{max-height:300px;overflow-y:auto}
+.saved-item{background:rgba(30,58,138,.15);border:1px solid rgba(212,160,23,.25);border-radius:10px;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;font-size:.8rem}
+.saved-item .info{flex:1;cursor:pointer}
+.saved-item .name{font-weight:700;color:var(--gold-light)}
+.saved-item .meta{font-size:.7rem;opacity:.7;margin-top:2px}
+.saved-item .actions{display:flex;gap:6px}
+.icon-btn{background:rgba(212,160,23,.2);border:none;border-radius:8px;width:32px;height:32px;color:var(--gold-light);font-size:1rem;cursor:pointer}
+.icon-btn.del{background:rgba(239,68,68,.2);color:var(--danger)}
+.checkbox-group{display:flex;flex-direction:column;gap:6px;background:rgba(26,20,16,.5);border:1.5px solid rgba(212,160,23,.25);border-radius:10px;padding:12px;margin-top:6px}
+.checkbox-group label{display:flex;align-items:center;gap:8px;font-size:.82rem;cursor:pointer;margin-bottom:0;padding:6px 8px;border-radius:6px}
+.checkbox-group label:hover{background:rgba(212,160,23,.08)}
+.checkbox-group input[type="checkbox"]{width:18px;height:18px;accent-color:var(--gold);flex-shrink:0}
+.lock-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.96);z-index:5000;display:none;align-items:center;justify-content:center;padding:20px}
+.lock-overlay.active{display:flex}
+.lock-box{background:linear-gradient(135deg,#2a1f15,#1a1410);border:2px solid var(--gold);border-radius:20px;padding:26px 22px;max-width:400px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+.lock-icon{font-size:3.5rem;margin-bottom:14px;color:var(--gold)}
+.lock-box h2{color:var(--gold-light);font-size:1.1rem;margin-bottom:8px}
+.lock-box p{font-size:.8rem;color:var(--cream);opacity:.8;margin-bottom:16px}
+.report-toggle{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(26,20,16,.6);border:1.5px solid rgba(212,160,23,.2);border-radius:10px;margin-bottom:6px;cursor:pointer;font-size:.82rem}
+.report-toggle input[type="checkbox"]{width:18px;height:18px;accent-color:var(--gold);flex-shrink:0}
+.sec-badge{display:inline-block;background:linear-gradient(135deg,#991b1b,#7f1d1d);color:#fff;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700;margin-right:6px}
+.search-results{margin-top:10px;max-height:340px;overflow-y:auto;border:1.5px solid rgba(212,160,23,.4);border-radius:12px;background:rgba(26,20,16,.85);padding:8px}
+.search-result-item{background:rgba(30,58,138,.18);border:1px solid rgba(212,160,23,.25);border-radius:10px;padding:10px 12px;margin-bottom:6px;cursor:pointer;transition:all .2s}
+.search-result-item:hover{background:rgba(30,58,138,.35);border-color:var(--gold)}
+.search-result-item .s-name{font-weight:700;color:var(--gold-light);font-size:.85rem}
+.search-result-item .s-meta{font-size:.72rem;opacity:.8;margin-top:3px;line-height:1.5}
+.search-result-item .s-tag{display:inline-block;background:rgba(212,160,23,.25);color:var(--gold-light);padding:2px 8px;border-radius:20px;font-size:.65rem;margin-right:4px;font-weight:700}
+.search-empty{padding:16px;text-align:center;font-size:.8rem;opacity:.7}
+.preview-result-item{background:rgba(30,58,138,.15);border:1.5px solid rgba(212,160,23,.3);border-radius:12px;padding:12px;margin-bottom:10px}
+.preview-result-item h4{font-size:.9rem;color:var(--gold-light);margin-bottom:6px;padding-bottom:6px;border-bottom:1px dashed rgba(212,160,23,.3)}
+.preview-result-item .p-row{font-size:.78rem;margin-bottom:4px;display:flex;gap:6px}
+.preview-result-item .p-row strong{color:var(--gold);flex-shrink:0}
+.copy-btn-row{display:flex;gap:6px;margin-top:8px}
+.copy-btn-row button{flex:1;padding:6px;font-size:.72rem;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-weight:700}
+.copy-btn-row .btn-load{background:linear-gradient(135deg,#0891b2,#06b6d4);color:#fff}
+.copy-btn-row .btn-view{background:linear-gradient(135deg,var(--lapis),var(--lapis-light));color:#fff}
+.warning-box{background:linear-gradient(135deg,rgba(239,68,68,.25),rgba(153,27,27,.25));border:1.5px solid var(--danger);border-radius:12px;padding:12px;margin-bottom:12px;font-size:.82rem;line-height:1.6}
+.warning-box strong{color:#fca5a5;display:block;margin-bottom:6px}
+.warning-box ul{margin-right:16px;margin-top:6px}
+.warning-box li{color:#fecaca;margin-bottom:3px}
+@media print{body{background:#fff!important;color:#000!important;padding:0!important}.bg-pattern,header,.container,footer,.modal-overlay,.toast,.progress-bar,.lock-overlay{display:none!important}#printArea{display:block!important}}
+#printArea{display:none}
+.print-page{page-break-after:always;padding:20px;font-family:'Cairo',Tahoma,Arial,sans-serif;color:#000;background:#fff;direction:rtl;min-height:100vh}
+.print-page:last-child{page-break-after:auto}
+.print-header{text-align:center;border-bottom:3px double #d4a017;padding-bottom:10px;margin-bottom:15px}
+.print-header h1{font-size:20px;color:#1e3a8a;margin-bottom:4px}
+.print-header h2{font-size:14px;color:#8b3a1f;font-weight:600}
+.print-section{margin-bottom:12px;border:1px solid #d4a017;border-radius:6px;padding:8px 12px}
+.print-section h3{font-size:13px;color:#1e3a8a;margin-bottom:6px;border-bottom:1px solid #eee;padding-bottom:4px}
+.print-row{display:flex;flex-wrap:wrap;gap:8px;font-size:11px;margin-bottom:4px}
+.print-row .item{flex:1;min-width:45%}
+.print-row .item strong{color:#1e3a8a}
+.print-table{width:100%;border-collapse:collapse;font-size:10px;margin-top:6px}
+.print-table th,.print-table td{border:1px solid #999;padding:3px 5px;text-align:center}
+.print-table th{background:#f0c75e;color:#000;font-weight:700}
+.print-footer{margin-top:20px;padding-top:10px;border-top:1px solid #d4a017;text-align:center;font-size:10px;color:#8b3a1f;font-style:italic}
+.print-meta{font-size:10px;color:#666;text-align:center;margin-top:4px}
+.pulse{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 6px 20px rgba(212,160,23,.4)}50%{box-shadow:0 6px 30px rgba(212,160,23,.7)}}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="bg-pattern">
+<svg class="sticker sticker-1" viewBox="0 0 100 100" fill="#d4a017"><path d="M10 90 L10 30 Q50 10 90 30 L90 90 Z M20 90 L20 40 Q50 25 80 40 L80 90 Z"/><rect x="25" y="45" width="10" height="45" fill="#1a1410"/><rect x="45" y="45" width="10" height="45" fill="#1a1410"/><rect x="65" y="45" width="10" height="45" fill="#1a1410"/><circle cx="50" cy="35" r="6" fill="#1a1410"/></svg>
+<svg class="sticker sticker-2" viewBox="0 0 100 100" fill="#d4a017"><ellipse cx="50" cy="65" rx="35" ry="18"/><circle cx="50" cy="40" r="20"/><circle cx="42" cy="35" r="3" fill="#1a1410"/><circle cx="58" cy="35" r="3" fill="#1a1410"/><path d="M40 50 Q50 58 60 50" stroke="#1a1410" stroke-width="2" fill="none"/><rect x="20" y="80" width="8" height="15"/><rect x="72" y="80" width="8" height="15"/><rect x="45" y="80" width="10" height="15"/></svg>
+<svg class="sticker sticker-3" viewBox="0 0 100 100" fill="#d4a017"><rect x="10" y="70" width="80" height="25"/><rect x="20" y="50" width="60" height="20"/><rect x="30" y="30" width="40" height="20"/><rect x="40" y="15" width="20" height="15"/><rect x="45" y="55" width="10" height="15" fill="#1a1410"/></svg>
+<svg class="sticker sticker-4" viewBox="0 0 100 100" fill="#d4a017"><ellipse cx="50" cy="60" rx="30" ry="15"/><circle cx="25" cy="45" r="12"/><path d="M15 40 Q10 30 20 25 Q25 35 25 40"/><path d="M35 40 Q40 30 30 25 Q25 35 25 40"/><path d="M55 50 Q75 30 90 45 Q75 55 60 55" opacity=".8"/><rect x="30" y="72" width="6" height="15"/><rect x="60" y="72" width="6" height="15"/></svg>
+<svg class="sticker sticker-5" viewBox="0 0 100 100" fill="#d4a017"><polygon points="50,5 61,38 95,38 68,58 78,92 50,72 22,92 32,58 5,38 39,38"/></svg>
+<svg class="sticker sticker-6" viewBox="0 0 100 100" fill="#d4a017"><polygon points="30,20 70,20 60,80 40,80"/><rect x="35" y="80" width="30" height="10"/><line x1="40" y1="35" x2="60" y2="35" stroke="#1a1410" stroke-width="2"/><line x1="40" y1="45" x2="60" y2="45" stroke="#1a1410" stroke-width="2"/><line x1="40" y1="55" x2="60" y2="55" stroke="#1a1410" stroke-width="2"/><line x1="40" y1="65" x2="60" y2="65" stroke="#1a1410" stroke-width="2"/></svg>
+<svg class="sticker sticker-7" viewBox="0 0 100 100" fill="#d4a017"><circle cx="50" cy="50" r="40" fill="none" stroke="#d4a017" stroke-width="3"/><circle cx="50" cy="50" r="12" fill="#d4a017"/><line x1="50" y1="10" x2="50" y2="90" stroke="#d4a017" stroke-width="2"/><line x1="10" y1="50" x2="90" y2="50" stroke="#d4a017" stroke-width="2"/><line x1="22" y1="22" x2="78" y2="78" stroke="#d4a017" stroke-width="2"/><line x1="78" y1="22" x2="22" y2="78" stroke="#d4a017" stroke-width="2"/></svg>
+</div>
+
+<header>
+<h1>🏛️ استمارة المهندس أزهر الإلكترونية</h1>
+<div class="subtitle">نظام الجرد والإدخال الميداني — يعمل أوفلاين</div>
+<div class="header-decoration">𓂀 𓁿 𓆃 𓅓 𓋹</div>
+</header>
+
+<div class="container">
+
+<div class="card">
+<div class="card-title"><span class="icon">🔍</span> البحث في السجلات المحفوظة</div>
+<div class="field">
+<label>ابحث بالاسم الرباعي أو رمز التسجيل أو رقم الهاتف</label>
+<input type="text" id="searchQuery" placeholder="اكتب اسم رب الأسرة أو رمز التسجيل أو الهاتف..." oninput="performSearch()">
+</div>
+<div class="field">
+<label>تصفية إضافية <span class="optional">(اختياري — الحي أو اسم المختار)</span></label>
+<input type="text" id="searchFilter" placeholder="اسم الحي أو اسم المختار..." oninput="performSearch()">
+</div>
+<div id="searchResults" class="hidden"></div>
+</div>
+
+<div class="card">
+<div class="card-title"><span class="icon">👤</span> اسم المختار وتاريخ التنظيم</div>
+<div class="field">
+<label>اسم المختار</label>
+<input type="text" id="surveyorName" placeholder="اكتب اسم المختار (يُحفظ تلقائياً)">
+</div>
+<div class="field">
+<label>تاريخ تنظيم الاستمارة (تلقائي — غير قابل للتعديل)</label>
+<input type="text" id="formDate" readonly>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title"><span class="icon">📋</span> معلومات الموقع</div>
+<div class="field">
+<label>رقم بدء الجرد</label>
+<input type="text" id="inventoryStart" placeholder="أدخل رقم بدء الجرد" inputmode="numeric">
+</div>
+<div class="field">
+<label>المحافظة</label>
+<select id="governorate">
+<option value="">-- اختر المحافظة --</option>
+<option>بغداد</option><option>البصرة</option><option>نينوى</option><option>أربيل</option>
+<option>النجف</option><option>كربلاء</option><option>ذي قار</option><option>بابل</option>
+<option>الأنبار</option><option>ديالى</option><option>كركوك</option><option>واسط</option>
+<option>ميسان</option><option>المثنى</option><option>القادسية</option><option>صلاح الدين</option>
+<option>دهوك</option><option>السليمانية</option><option>حلبجة</option>
+<option>بلا</option><option>أخرى</option>
+</select>
+</div>
+<div class="field">
+<label>القضاء</label>
+<input type="text" id="district" placeholder="اكتب اسم القضاء">
+</div>
+<div class="field">
+<label>الناحية <span class="optional">(اختياري)</span></label>
+<input type="text" id="subdistrict" placeholder="اكتب اسم الناحية">
+</div>
+<div class="field">
+<label>المنطقة <span class="optional">(اختياري)</span></label>
+<input type="text" id="area" placeholder="اكتب اسم المنطقة">
+</div>
+<div class="field">
+<label>الحي <span class="optional">(اختياري)</span></label>
+<input type="text" id="neighborhood" placeholder="اكتب اسم الحي">
+</div>
+</div>
+
+<div class="card">
+<div class="card-title"><span class="icon">🏗️</span> نوع المنشأ</div>
+<div class="field">
+<label>نوع المنشأ</label>
+<select id="buildingType" onchange="toggleBuildingSections()">
+<option value="">-- اختر نوع المنشأ --</option>
+<option>دار سكني</option>
+<option>مبنى تجاري</option>
+<option>بلا</option>
+<option>أخرى</option>
+</select>
+</div>
+</div>
+<div id="commercialSection" class="card hidden">
+<div class="card-title"><span class="icon">🏪</span> تفاصيل المبنى التجاري</div>
+
+<div class="field">
+<label>نمط الحيازة</label>
+<select id="commercialSubType" onchange="toggleBuildingSections()">
+<option value="">-- اختر --</option>
+<option>ملك طابو صرف</option>
+<option>مؤجر</option>
+<option>حيازة أرض سكنية</option>
+<option>زراعي</option>
+<option>متجاوز</option>
+<option>سرقفلية</option>
+<option>بلا</option>
+<option>أخرى</option>
+</select>
+</div>
+
+<div class="field">
+<label>نوع الموقع التجاري</label>
+<select id="commercialType" onchange="toggleCommercialTypeSub()">
+<option value="">-- اختر --</option>
+<option>خزن</option>
+<option>بيع مباشر</option>
+<option>تقديم خدمات</option>
+<option>إدارة أو مكتب</option>
+<option>بلا</option>
+<option>أخرى</option>
+</select>
+</div>
+
+<div class="field hidden" id="commercialSubOptionsWrap">
+<label>تفاصيل النشاط</label>
+<select id="commercialSubOptions"></select>
+</div>
+
+<div class="field">
+<label>رقم بطاقة السكن</label>
+<input type="text" id="commHousingCard" placeholder="رقم بطاقة السكن">
+</div>
+<div class="field">
+<label>رقم البطاقة التموينية</label>
+<input type="text" id="commRationNumber" placeholder="رقم البطاقة التموينية">
+</div>
+</div>
+
+<div id="landlordSection" class="card hidden">
+<div class="card-title"><span class="icon">👤</span> معلومات صاحب الملك / المالك</div>
+<div class="field"><label>الاسم الرباعي واللقب</label><input type="text" id="landlordName" placeholder="الاسم الرباعي واللقب"></div>
+<div class="field"><label>اللقب</label><input type="text" id="landlordSurname" placeholder="اللقب"></div>
+<div class="field"><label>رقم الهوية</label><input type="text" id="landlordId" placeholder="رقم الهوية"></div>
+<div class="field">
+<label>حالة العمل</label>
+<select id="landlordOccupation">
+<option value="">-- اختر --</option>
+<option>موظف</option><option>طالب</option><option>خريج</option><option>كاسب</option>
+<option>عاطل</option><option>تاجر</option><option>موظف بعقد</option>
+<option>مستفيد من الرعاية الاجتماعية</option>
+<option>بلا</option><option>أخرى</option>
+</select>
+</div>
+<div class="field"><label>رقم الهاتف</label><input type="tel" id="landlordPhone" placeholder="07XXXXXXXXX" maxlength="11"></div>
+<div class="field">
+<label>المحافظة</label>
+<select id="landlordGov">
+<option value="">-- اختر --</option>
+<option>بغداد</option><option>البصرة</option><option>نينوى</option><option>أربيل</option>
+<option>النجف</option><option>كربلاء</option><option>ذي قار</option><option>بابل</option>
+<option>الأنبار</option><option>ديالى</option><option>كركوك</option><option>واسط</option>
+<option>ميسان</option><option>المثنى</option><option>القادسية</option><option>صلاح الدين</option>
+<option>دهوك</option><option>السليمانية</option><option>حلبجة</option>
+<option>بلا</option><option>أخرى</option>
+</select>
+</div>
+<div class="field"><label>القضاء</label><input type="text" id="landlordDistrict" placeholder="القضاء"></div>
+<div class="field"><label>الناحية</label><input type="text" id="landlordSubdistrict" placeholder="الناحية"></div>
+<div class="field"><label>المنطقة</label><input type="text" id="landlordArea" placeholder="المنطقة"></div>
+<div class="field"><label>الحي</label><input type="text" id="landlordNeighborhood" placeholder="الحي"></div>
+<div class="field"><label>عدد أفراد أسرته</label><input type="text" id="landlordFamilyCount" placeholder="عدد الأفراد" inputmode="numeric"></div>
+<div class="field"><label>رقم بطاقة سكنهم</label><input type="text" id="landlordHousingCard" placeholder="رقم بطاقة السكن"></div>
+<div class="field"><label>رقم بطاقتهم التموينية</label><input type="text" id="landlordRationNumber" placeholder="رقم البطاقة التموينية"></div>
+</div>
+
+<div id="tenantSection" class="card hidden">
+<div class="card-title"><span class="icon">👥</span> معلومات المؤجر (المستأجر)</div>
+<div class="field"><label>الاسم الرباعي واللقب</label><input type="text" id="tenantName" placeholder="الاسم الرباعي واللقب"></div>
+<div class="field"><label>اللقب</label><input type="text" id="tenantSurname" placeholder="اللقب"></div>
+<div class="field"><label>رقم الهوية</label><input type="text" id="tenantId" placeholder="رقم الهوية"></div>
+<div class="field">
+<label>حالة العمل</label>
+<select id="tenantOccupation">
+<option value="">-- اختر --</option>
+<option>موظف</option><option>طالب</option><option>خريج</option><option>كاسب</option>
+<option>عاطل</option><option>تاجر</option><option>موظف بعقد</option>
+<option>مستفيد من الرعاية الاجتماعية</option>
+<option>بلا</option><option>أخرى</option>
+</select>
+</div>
+<div class="field"><label>رقم الهاتف</label><input type="tel" id="tenantPhone" placeholder="07XXXXXXXXX" maxlength="11"></div>
+<div class="field">
+<label>المحافظة</label>
+<select id="tenantGov">
+<option value="">-- اختر --</option>
+<option>بغداد</option><option>البصرة</option><option>نينوى</option><option>أربيل</option>
+<option>النجف</option><option>كربلاء</option><option>ذي قار</option><option>بابل</option>
+<option>الأنبار</option><option>ديالى</option><option>كركوك</option><option>واسط</option>
+<option>ميسان</option><option>المثنى</option><option>القادسية</option><option>صلاح الدين</option>
+<option>دهوك</option><option>السليمانية</option><option>حلبجة</option>
+<option>بلا</option><option>أخرى</option>
+</select>
+</div>
+<div class="field"><label>القضاء</label><input type="text" id="tenantDistrict" placeholder="القضاء"></div>
+<div class="field"><label>الناحية</label><input type="text" id="tenantSubdistrict" placeholder="الناحية"></div>
+<div class="field"><label>المنطقة</label><input type="text" id="tenantArea" placeholder="المنطقة"></div>
+<div class="field"><label>الحي</label><input type="text" id="tenantNeighborhood" placeholder="الحي"></div>
+<div class="field"><label>عدد أفراد أسرته</label><input type="text" id="tenantFamilyCount" placeholder="عدد الأفراد" inputmode="numeric"></div>
+<div class="field"><label>رقم بطاقة سكنهم</label><input type="text" id="tenantHousingCard" placeholder="رقم بطاقة السكن"></div>
+<div class="field"><label>رقم بطاقتهم التموينية</label><input type="text" id="tenantRationNumber" placeholder="رقم البطاقة التموينية"></div>
+</div>
+<div id="residentialSection" class="card hidden">
+<div class="card-title"><span class="icon">🏠</span> الدار السكني</div>
+
+<div class="field">
+<label>نوع حيازة أرض البناء</label>
+<select id="landOwnership">
+<option value="">-- اختر --</option>
+<option>ملك طابو صرف</option>
+<option>حيازة أرض سكنية</option>
+<option>متجاوز</option>
+<option>زراعي</option>
+<option>سرقفلية</option>
+<option>بلا</option>
+<option>أخرى</option>
+</select>
+</div>
+
+<div class="field">
+<label>كنية سكنة البيت أو مالكه الرائدة</label>
+<input type="text" id="houseNickname" placeholder="الكنية / اسم مالك البيت">
+</div>
+
+<div class="field">
+<label>عدد العوائل في البيت</label>
+<select id="householdCount" onchange="generateHouseholds()">
+<option value="0">-- اختر --</option>
+<option value="0">0</option>
+<option value="1">1</option><option value="2">2</option><option value="3">3</option>
+<option value="4">4</option><option value="5">5</option><option value="6">6</option>
+<option value="7">7</option><option value="8">8</option><option value="9">9</option>
+<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+</select>
+</div>
+
+<div id="householdsContainer"></div>
+
+<div class="grand-total" id="houseGrandTotal">📊 إجمالي سكان البيت: 0 فرد | عدد العوائل: 0</div>
+</div>
+
+<div class="card">
+<div class="card-title"><span class="icon">📝</span> ملاحظات عامة</div>
+<div class="field">
+<textarea id="notes" placeholder="ملاحظات على الاستمارة كاملة..."></textarea>
+</div>
+</div>
+
+<div class="card">
+<button type="button" class="btn btn-primary pulse" onclick="handleSave()">💾 حفظ الاستمارة</button>
+<button type="button" class="btn btn-new-family" onclick="handleNewFamily()">➕ استمارة جديدة (يزيد رقم الجرد)</button>
+<div class="btn-row">
+<button type="button" class="btn btn-secondary" onclick="openPrintModal()">🖨️ طباعة / PDF</button>
+<button type="button" class="btn btn-secondary" onclick="openSavedModal()">📁 السجلات</button>
+</div>
+<div class="btn-row">
+<button type="button" class="btn btn-reports" onclick="openReportsModal()">📊 التقارير</button>
+<button type="button" class="btn btn-preview" onclick="openPreviewModal()">👁️ المعاينة</button>
+</div>
+<div class="btn-row">
+<button type="button" class="btn btn-security" onclick="openSecurityGate()">🛡️ إعدادات الأمان</button>
+</div>
+<div class="btn-row">
+<button type="button" class="btn btn-secondary" onclick="exportProject()" style="background:linear-gradient(135deg,#0891b2,#06b6d4)">📤 تصدير المشروع</button>
+<button type="button" class="btn btn-secondary" onclick="importProject()" style="background:linear-gradient(135deg,#7c3aed,#8b5cf6)">📥 استيراد المشروع</button>
+</div>
+<input type="file" id="importFile" accept=".json" style="display:none">
+<button type="button" class="btn btn-secondary" onclick="resetAll()" style="background:linear-gradient(135deg,#4b5563,#6b7280)">🔄 مسح الكل والبدء من جديد</button>
+</div>
+
+<div class="notice">
+<span class="heart">❤️</span> تم تصميم هذا الموقع تطوعاً بواسطة المهندس أزهر باسم محمد<br>
+دعماً للاستقرار المجتمعي <span class="heart">🇮🇶</span>
+</div>
+
+</div>
+
+<footer>
+تم تصميم هذا الموقع تطوعاً بواسطة المهندس أزهر باسم محمد<br>
+دعماً للاستقرار المجتمعي 🇮🇶 — يعمل بدون إنترنت
+</footer>
+<div class="modal-overlay" id="savedModal">
+<div class="modal">
+<h2>📁 السجلات المحفوظة</h2>
+<div id="savedList" class="saved-list">
+<p style="text-align:center;opacity:.6;padding:20px">لا توجد سجلات</p>
+</div>
+<button type="button" class="btn btn-secondary" onclick="closeModal('savedModal')" style="margin-top:12px">إغلاق</button>
+</div>
+</div>
+
+<div class="modal-overlay" id="printModal">
+<div class="modal">
+<h2>🖨️ خيارات الطباعة / PDF</h2>
+<div style="margin-bottom:14px">
+<label style="font-size:.9rem;font-weight:700;color:var(--gold-light);display:block;margin-bottom:8px">نوع الطباعة</label>
+<label class="print-option"><input type="radio" name="printType" value="full" checked><div><div class="label-text">صفحة لكل استمارة</div></div></label>
+<label class="print-option"><input type="radio" name="printType" value="names"><div><div class="label-text">أسماء أرباب الأسر</div></div></label>
+<label class="print-option"><input type="radio" name="printType" value="count"><div><div class="label-text">حسب عدد الأفراد</div></div></label>
+</div>
+<div style="margin-bottom:14px">
+<label style="font-size:.9rem;font-weight:700;color:var(--gold-light);display:block;margin-bottom:8px">تصنيفات</label>
+<div style="font-size:.8rem;margin-bottom:8px">الموظفون</div>
+<div class="tri-toggle">
+<label><input type="radio" name="printEmployee" value="yes"> نعم</label>
+<label><input type="radio" name="printEmployee" value="no" checked> لا</label>
+<label><input type="radio" name="printEmployee" value="all"> الكل</label>
+</div>
+<div style="font-size:.8rem;margin:10px 0 8px">الطلاب</div>
+<div class="tri-toggle">
+<label><input type="radio" name="printStudent" value="yes"> نعم</label>
+<label><input type="radio" name="printStudent" value="no" checked> لا</label>
+<label><input type="radio" name="printStudent" value="all"> الكل</label>
+</div>
+<div style="font-size:.8rem;margin:10px 0 8px">الكاسبون</div>
+<div class="tri-toggle">
+<label><input type="radio" name="printEarner" value="yes"> نعم</label>
+<label><input type="radio" name="printEarner" value="no" checked> لا</label>
+<label><input type="radio" name="printEarner" value="all"> الكل</label>
+</div>
+</div>
+<button type="button" class="btn btn-primary" onclick="executePrint()">🖨️ طباعة الآن</button>
+<button type="button" class="btn btn-secondary" onclick="closeModal('printModal')" style="background:linear-gradient(135deg,#4b5563,#6b7280)">إلغاء</button>
+</div>
+</div>
+
+<div class="modal-overlay" id="reportsModal">
+<div class="modal">
+<h2>📊 التقارير والفلترة</h2>
+
+<div style="margin-bottom:14px">
+<label style="font-size:.9rem;font-weight:700;color:var(--gold-light);display:block;margin-bottom:8px">نوع التقرير</label>
+<label class="print-option"><input type="radio" name="reportType" value="full" checked><div><div class="label-text">تقرير كامل (تفاصيل)</div></div></label>
+<label class="print-option"><input type="radio" name="reportType" value="summary"><div><div class="label-text">تقرير ملخّص (جدول)</div></div></label>
+<label class="print-option"><input type="radio" name="reportType" value="progress"><div><div class="label-text">تقدم المشروع بالتسلسل</div></div></label>
+</div>
+
+<div style="margin-bottom:14px">
+<label style="font-size:.9rem;font-weight:700;color:var(--gold-light);display:block;margin-bottom:8px">فلترة النتائج (اختر ما تريد تضمينه)</label>
+
+<div style="font-size:.78rem;color:var(--gold);margin:8px 0 4px">حسب نوع المنشأ</div>
+<label class="report-toggle"><input type="checkbox" class="rf" value="commercial"> المنشآت التجارية فقط</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="residential"> الدور السكنية فقط</label>
+
+<div style="font-size:.78rem;color:var(--gold);margin:8px 0 4px">حسب الحيازة</div>
+<label class="report-toggle"><input type="checkbox" class="rf" value="tabu"> ملك طابو صرف</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="rented"> المؤجر</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="hayaza"> الحيازة السكنية</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="zirai"> الزراعي</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="mutajawiz"> المتجاوز</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="surghflia"> السر قفلية</label>
+
+<div style="font-size:.78rem;color:var(--gold);margin:8px 0 4px">حسب الحالة المهنية</div>
+<label class="report-toggle"><input type="checkbox" class="rf" value="employees"> الموظفون</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="students"> الطلاب</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="earners"> الكاسبون</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="unemployed"> العاطلون</label>
+
+<div style="font-size:.78rem;color:var(--gold);margin:8px 0 4px">حسب الحالة الاجتماعية</div>
+<label class="report-toggle"><input type="checkbox" class="rf" value="widows"> الأرامل</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="divorced"> المطلقات/المطلقون</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="orphans-father"> فاقدو الأب</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="orphans-mother"> فاقدو الأم</label>
+
+<div style="font-size:.78rem;color:var(--gold);margin:8px 0 4px">حسب العدد</div>
+<label class="report-toggle"><input type="checkbox" class="rf" value="many-members"> عوائل بها أكثر من 5 أفراد</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="many-wives"> متعددو الزوجات (2+)</label>
+<label class="report-toggle"><input type="checkbox" class="rf" value="many-families"> بيوت بها أكثر من 3 عوائل</label>
+</div>
+
+<button type="button" class="btn btn-primary" onclick="executeReport()">📊 عرض التقرير / طباعة</button>
+<button type="button" class="btn btn-secondary" onclick="closeModal('reportsModal')" style="background:linear-gradient(135deg,#4b5563,#6b7280)">إلغاء</button>
+</div>
+</div>
+<div class="modal-overlay" id="previewModal">
+<div class="modal" style="max-width:600px">
+<h2>👁️ المعاينة والفلترة</h2>
+
+<div class="field">
+<label>بحث سريع في السجلات</label>
+<input type="text" id="previewSearch" placeholder="ابحث بالاسم أو رمز التسجيل..." oninput="executePreview()">
+</div>
+
+<div style="margin-bottom:14px">
+<label style="font-size:.88rem;font-weight:700;color:var(--gold-light);display:block;margin-bottom:8px">نوع المنشأ</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="commercial"> المنشآت التجارية</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="residential"> الدور السكنية</label>
+
+<div style="font-size:.78rem;color:var(--gold);margin:8px 0 4px">حسب الحيازة</div>
+<label class="report-toggle"><input type="checkbox" class="pf" value="tabu"> ملك طابو</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="rented"> مؤجر</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="hayaza"> حيازة</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="zirai"> زراعي</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="mutajawiz"> متجاوز</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="surghflia"> سرقفلية</label>
+
+<div style="font-size:.78rem;color:var(--gold);margin:8px 0 4px">حسب الحالة</div>
+<label class="report-toggle"><input type="checkbox" class="pf" value="employees"> موظفون</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="students"> طلاب</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="earners"> كاسبون</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="widows"> أرامل</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="divorced"> مطلقون</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="orphans-father"> فاقدو الأب</label>
+<label class="report-toggle"><input type="checkbox" class="pf" value="orphans-mother"> فاقدو الأم</label>
+</div>
+
+<div id="previewResults" style="max-height:400px;overflow-y:auto;margin-top:10px"></div>
+
+<button type="button" class="btn btn-secondary" onclick="closeModal('previewModal')" style="margin-top:12px;background:linear-gradient(135deg,#4b5563,#6b7280)">إغلاق</button>
+</div>
+</div>
+
+<div class="modal-overlay" id="adminPassModal">
+<div class="modal">
+<h2>🛡️ بوابة إعدادات الأمان</h2>
+<p style="text-align:center;font-size:.8rem;opacity:.8;margin-bottom:14px">أدخل رمز المسؤول لفتح الإعدادات</p>
+<div class="field"><label>رمز المسؤول</label><input type="password" id="adminPassInput" inputmode="numeric" placeholder="******"></div>
+<button type="button" class="btn btn-primary" onclick="verifyAdminPass()">🔓 فتح</button>
+<button type="button" class="btn btn-secondary" onclick="closeModal('adminPassModal')" style="background:linear-gradient(135deg,#4b5563,#6b7280)">إلغاء</button>
+</div>
+</div>
+
+<div class="modal-overlay" id="securityModal">
+<div class="modal">
+<h2>🛡️ إعدادات الأمان</h2>
+<div class="field">
+<label>رمز حماية المشروع (للمختار)</label>
+<input type="text" id="newSurveyorPass" placeholder="اتركه فارغاً لإلغاء القفل">
+</div>
+<p style="font-size:.75rem;opacity:.7;margin-bottom:12px;text-align:center">عند تعيين رمز، سيُطلب فتحه عند كل تشغيل للتطبيق. اتركه فارغاً لإلغاء الحماية.</p>
+<button type="button" class="btn btn-primary" onclick="saveSecuritySettings()">💾 حفظ الإعدادات</button>
+<button type="button" class="btn btn-secondary" onclick="closeModal('securityModal')" style="background:linear-gradient(135deg,#4b5563,#6b7280)">إغلاق</button>
+</div>
+</div>
+
+<div class="modal-overlay" id="conflictsModal">
+<div class="modal">
+<h2>⚠️ تعارض في البيانات</h2>
+<div class="warning-box" id="conflictsBox"></div>
+<button type="button" class="btn btn-secondary" onclick="closeModal('conflictsModal')" style="background:linear-gradient(135deg,#4b5563,#6b7280)">إغلاق</button>
+</div>
+</div>
+
+<div class="lock-overlay" id="lockOverlay">
+<div class="lock-box">
+<div class="lock-icon">🔐</div>
+<h2>🔒 التطبيق مقفل</h2>
+<p>أدخل رمز الحماية للدخول إلى الأداة</p>
+<div class="field"><label>رمز الحماية</label><input type="password" id="lockPassInput" inputmode="numeric" placeholder="******"></div>
+<button type="button" class="btn btn-primary" onclick="unlockApp()">🔓 فتح القفل</button>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div id="printArea"></div>
+<script>
+var records = [];
+try { records = JSON.parse(localStorage.getItem('azhar_records') || '[]'); } catch(e) { records = []; }
+
+var RELATION_OPTIONS = ['الأب','الأم','ابن','ابنة','حفيد','حفيدة','زوجة ابن','زوج ابنة','اخ','اخت','ابناء الاخوة او الاخوات'];
+var OCCUPATION_OPTIONS = ['موظف','طالب','خريج','كاسب','عاطل','تاجر','موظف بعقد','مستفيد من الرعاية الاجتماعية'];
+var EDUCATION_OPTIONS = ['بلا','ابتدائية','متوسطة','إعدادية','دبلوم','بكلوريوس','ماجستير','دكتوراه','بروف','علوم دينية'];
+var MALE_MARITAL = ['أعزب','متزوج','أرمل','مطلق','منفصل'];
+var FEMALE_MARITAL = ['عزباء','متزوجة','أرملة','مطلقة','منفصلة'];
+var EX_SPOUSE_STATUS = ['متوفي','شهيد','طليق','منفصل'];
+var PARENT_STATUS_OPTIONS = [
+  { key: 'present', label: 'موجودين في الأسرة', defaultChecked: true },
+  { key: 'father-dead', label: 'والده متوفي' },
+  { key: 'father-martyr', label: 'والده شهيد' },
+  { key: 'father-divorce', label: 'غياب الأب لسبب الطلاق' },
+  { key: 'father-other', label: 'غياب الأب لأسباب أخرى' },
+  { key: 'mother-dead', label: 'والدته متوفية' },
+  { key: 'mother-divorce', label: 'غياب الوالدة لسبب الطلاق' },
+  { key: 'mother-other', label: 'غياب الوالدة لأسباب أخرى' },
+  { key: 'both-dead', label: 'غياب الوالدين لأسباب الوفاة' },
+  { key: 'both-divorce', label: 'غياب الوالدين لأسباب الطلاق' },
+  { key: 'both-other', label: 'غياب الوالدين لأسباب أخرى' }
+];
+
+var STORE_OPTIONS = ['مخزن مواد منزلية','مخزن مواد إنشائية','مخزن أجهزة كهربائية','مخزن ملابس','مخزن مواد غذائية','مخزن أثاث','مخزن قطع غيار','مخزن أدوات صحية'];
+var DIRECT_SALE_OPTIONS = ['سوق','فرن','صيدلية','ملابس','بقالة','جزارة','خضار وفواكه','حلويات','مطعم','كافيه','محل هواتف','محل إلكترونيات','مكتبة','أدوات منزلية','محل ألعاب','محل زهور','محل عطور','محل أحذية','محل حقائب','محل ذهب','محل ساعات','محل نظارات','أدوات صحية','كهربائيات','أدوات إنشائية','دهان','زجاج','ألمنيوم','حدادة','نجارة','تبريد وتكييف','غاز','محل وقود','غسيل سيارات','قطع غيار','معرض سيارات','مكتب عقارات'];
+var SERVICES_OPTIONS = ['خدمات طبية وصحية','حلاقة','صيانة الهواتف','صيانة الإلكترونيات','تأجير مواد','تأجير عدد إنشائية','مكتب عقود بيع وشراء','خياطة','كوفي شوب','مطعم','مغسلة ملابس','كوافير','تدليك'];
+var OFFICE_OPTIONS = ['منظمات خيرية','منظمة سياسية أو حزبية','مكتب محاماة','مكتب محاسبة','مكتب هندسي','مكتب دعاية وإعلان','مكتب استقدام','مكتب سفر وسياحة','شركة تجارية','مؤسسة خدماتية','مكتب تأمين'];
+
+function opts(list, sel){
+  var h = '';
+  for (var i = 0; i < list.length; i++) {
+    var v = list[i];
+    h += '<option value="' + v + '"' + (v === sel ? ' selected' : '') + '>' + v + '</option>';
+  }
+  h += '<option value="بلا"' + (sel === 'بلا' ? ' selected' : '') + '>بلا</option>';
+  h += '<option value="أخرى"' + (sel === 'أخرى' ? ' selected' : '') + '>أخرى</option>';
+  return h;
+}
+function numOpts(max, sel){
+  var h = '';
+  for (var i = 1; i <= max; i++) h += '<option value="' + i + '"' + (i == sel ? ' selected' : '') + '>' + i + '</option>';
+  return h;
+}
+function numOpts0(max, sel){
+  var h = '<option value="0">بلا</option>';
+  for (var i = 1; i <= max; i++) h += '<option value="' + i + '"' + (i == sel ? ' selected' : '') + '>' + i + '</option>';
+  return h;
+}
+function getVal(id){ var e = document.getElementById(id); return e ? e.value : ''; }
+function setVal(id, v){ var e = document.getElementById(id); if (e) e.value = v == null ? '' : v; }
+function el(id){ return document.getElementById(id); }
+function showEl(id){ var e = el(id); if (e) e.classList.remove('hidden'); }
+function hideEl(id){ var e = el(id); if (e) e.classList.add('hidden'); }
+
+function showToast(msg, type){
+  var t = el('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.className = 'toast ' + (type === 'error' ? 'error' : '');
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2500);
+}
+function escapeHtml(s){
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+function updateProgress(){
+  var fields = document.querySelectorAll('.container input, .container select, .container textarea');
+  var filled = 0;
+  for (var i = 0; i < fields.length; i++) { if (fields[i].value) filled++; }
+  var pct = fields.length ? (filled / fields.length) * 100 : 0;
+  var bar = el('progressBar');
+  if (bar) bar.style.width = pct + '%';
+}
+function initAutoDate(){
+  var d = new Date();
+  var dd = String(d.getDate()).padStart(2,'0');
+  var mm = String(d.getMonth()+1).padStart(2,'0');
+  var yyyy = d.getFullYear();
+  var hh = String(d.getHours()).padStart(2,'0');
+  var mi = String(d.getMinutes()).padStart(2,'0');
+  setVal('formDate', dd + '/' + mm + '/' + yyyy + ' — ' + hh + ':' + mi);
+}
+
+// ====== البحث في السجلات ======
+function normalizeText(s){
+  if (!s) return '';
+  return String(s).replace(/\s+/g, ' ').trim().toLowerCase();
+}
+function recordMatchesQuery(r, q, filter){
+  if (filter) {
+    var f = normalizeText(filter);
+    var hay = normalizeText(r.neighborhood || '') + ' ' + normalizeText(r.surveyorName || '') + ' ' + normalizeText(r.governorate || '') + ' ' + normalizeText(r.district || '');
+    if (hay.indexOf(f) === -1) return false;
+  }
+  if (!q) return true;
+  var ql = normalizeText(q);
+  var inv = normalizeText(r.inventoryStart || '');
+  var surv = normalizeText(r.surveyorName || '');
+  if (inv.indexOf(ql) !== -1) return true;
+  if (surv.indexOf(ql) !== -1) return true;
+  var fams = r.families || [];
+  for (var i = 0; i < fams.length; i++) {
+    var f2 = fams[i];
+    if (normalizeText(f2.headName || '').indexOf(ql) !== -1) return true;
+    if (normalizeText(f2.headPhone || '').indexOf(ql) !== -1) return true;
+    if (normalizeText(f2.headMother || '').indexOf(ql) !== -1) return true;
+    var mems = f2.members || [];
+    for (var j = 0; j < mems.length; j++) {
+      if (normalizeText(mems[j].name || '').indexOf(ql) !== -1) return true;
+      if (normalizeText(mems[j].phone || '').indexOf(ql) !== -1) return true;
+    }
+  }
+  if (normalizeText(r.landlordName || '').indexOf(ql) !== -1) return true;
+  if (normalizeText(r.tenantName || '').indexOf(ql) !== -1) return true;
+  if (normalizeText(r.houseNickname || '').indexOf(ql) !== -1) return true;
+  return false;
+}
+function getRecordDisplayName(r){
+  if (r.families && r.families[0] && r.families[0].headName) return r.families[0].headName;
+  if (r.landlordName) return r.landlordName;
+  if (r.tenantName) return r.tenantName;
+  if (r.houseNickname) return r.houseNickname;
+  return 'غير مسمى';
+}
+function performSearch(){
+  var q = getVal('searchQuery');
+  var f = getVal('searchFilter');
+  var box = el('searchResults');
+  if (!box) return;
+  if (!q && !f) { box.classList.add('hidden'); box.innerHTML = ''; return; }
+  var results = [];
+  for (var i = 0; i < records.length; i++) {
+    if (recordMatchesQuery(records[i], q, f)) results.push(records[i]);
+  }
+  if (results.length === 0) {
+    box.innerHTML = '<div class="search-empty">لا توجد نتائج مطابقة</div>';
+    box.classList.remove('hidden');
+    return;
+  }
+  var h = '';
+  var max = Math.min(results.length, 30);
+  for (var k = 0; k < max; k++) {
+    var r = results[k];
+    var name = getRecordDisplayName(r);
+    h += '<div class="search-result-item" onclick="loadRecordFromSearch(' + r.id + ')">';
+    h += '<div class="s-name">' + escapeHtml(name) + '</div>';
+    h += '<div class="s-meta">';
+    if (r.inventoryStart) h += '<span class="s-tag">رقم: ' + escapeHtml(r.inventoryStart) + '</span>';
+    if (r.neighborhood) h += '<span class="s-tag">حي: ' + escapeHtml(r.neighborhood) + '</span>';
+    if (r.surveyorName) h += '<span class="s-tag">مختار: ' + escapeHtml(r.surveyorName) + '</span>';
+    h += '</div>';
+    h += '<div class="s-meta">' + escapeHtml(r.buildingType || '—') + ' | ' + escapeHtml(r.governorate || '—') + ' | ' + (r.families ? r.families.length : 0) + ' عائلة</div>';
+    h += '</div>';
+  }
+  if (results.length > max) h += '<div class="search-empty">و ' + (results.length - max) + ' نتيجة أخرى...</div>';
+  box.innerHTML = h;
+  box.classList.remove('hidden');
+}
+function loadRecordFromSearch(id){
+  closeModal('savedModal');
+  loadRecord(id);
+  setVal('searchQuery', '');
+  setVal('searchFilter', '');
+  var box = el('searchResults');
+  if (box) { box.classList.add('hidden'); box.innerHTML = ''; }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleBuildingSections(){
+  var bt = getVal('buildingType');
+  if (bt === 'مبنى تجاري') { showEl('commercialSection'); hideEl('residentialSection'); }
+  else if (bt === 'دار سكني') { hideEl('commercialSection'); showEl('residentialSection'); hideEl('landlordSection'); hideEl('tenantSection'); }
+  else { hideEl('commercialSection'); hideEl('residentialSection'); hideEl('landlordSection'); hideEl('tenantSection'); return; }
+  var sub = getVal('commercialSubType');
+  if (bt === 'مبنى تجاري') {
+    if (sub === 'مؤجر') { showEl('landlordSection'); showEl('tenantSection'); }
+    else if (sub === 'ملك طابو صرف') { showEl('landlordSection'); hideEl('tenantSection'); }
+    else if (sub && sub !== 'بلا' && sub !== 'أخرى') { showEl('landlordSection'); hideEl('tenantSection'); }
+    else { hideEl('landlordSection'); hideEl('tenantSection'); }
+  }
+}
+function toggleCommercialTypeSub(){
+  var type = getVal('commercialType');
+  var wrap = el('commercialSubOptionsWrap');
+  var sel = el('commercialSubOptions');
+  if (!wrap || !sel) return;
+  var list = null;
+  if (type === 'خزن') list = STORE_OPTIONS;
+  else if (type === 'بيع مباشر') list = DIRECT_SALE_OPTIONS;
+  else if (type === '
+           <script>
+function openSavedModal(){
+  var list = el('savedList');
+  if (!list) return;
+  if (records.length === 0) {
+    list.innerHTML = '<p style="text-align:center;opacity:.6;padding:20px">لا توجد سجلات</p>';
+  } else {
+    var h = '';
+    for (var i = 0; i < records.length; i++) {
+      var r = records[i];
+      var name = getRecordDisplayName(r);
+      h += '<div class="saved-item"><div class="info" onclick="loadRecord(' + r.id + ')">';
+      h += '<div class="name">' + escapeHtml(name) + '</div>';
+      h += '<div class="meta">رقم الجرد: ' + escapeHtml(r.inventoryStart || '—') + ' | ' + escapeHtml(r.governorate || '—') + ' | ' + escapeHtml(r.buildingType || '—') + '</div>';
+      h += '</div><div class="actions">';
+      h += '<button type="button" class="icon-btn" onclick="loadRecord(' + r.id + ')">✏️</button>';
+      h += '<button type="button" class="icon-btn del" onclick="deleteRecord(' + r.id + ')">🗑️</button>';
+      h += '</div></div>';
+    }
+    list.innerHTML = h;
+  }
+  openModal('savedModal');
+}
+function loadRecord(id){
+  var r = null;
+  for (var i = 0; i < records.length; i++) { if (records[i].id === id) { r = records[i]; break; } }
+  if (!r) return;
+  var keys = ['surveyorName','inventoryStart','governorate','district','subdistrict','area','neighborhood','buildingType','commercialSubType','commercialType','commercialSubOptions','commHousingCard','commRationNumber','landlordName','landlordSurname','landlordId','landlordOccupation','landlordPhone','landlordGov','landlordDistrict','landlordSubdistrict','landlordArea','landlordNeighborhood','landlordFamilyCount','landlordHousingCard','landlordRationNumber','tenantName','tenantSurname','tenantId','tenantOccupation','tenantPhone','tenantGov','tenantDistrict','tenantSubdistrict','tenantArea','tenantNeighborhood','tenantFamilyCount','tenantHousingCard','tenantRationNumber','landOwnership','houseNickname','householdCount','notes'];
+  for (var j = 0; j < keys.length; j++) setVal(keys[j], r[keys[j]]);
+  if (r.formDate) setVal('formDate', r.formDate); else initAutoDate();
+  toggleBuildingSections();
+  toggleCommercialTypeSub();
+  var hc = el('householdCount');
+  if (hc) hc.value = r.families ? r.families.length : 0;
+  generateHouseholds();
+  setTimeout(function(){
+    var blocks = document.querySelectorAll('.family-block');
+    for (var i = 0; i < blocks.length; i++) {
+      var f = r.families && r.families[i];
+      if (!f) continue;
+      var b = blocks[i];
+      function sv(cls, val){ var e = b.querySelector(cls); if (e) e.value = val == null ? '' : val; }
+      sv('.f-housingCard', f.housingCard); sv('.f-rationNumber', f.rationNumber);
+      sv('.f-headName', f.headName); sv('.f-headSurname', f.headSurname);
+      sv('.f-headAge', f.headAge); sv('.f-headMother', f.headMother);
+      sv('.f-headBirth', f.headBirth); sv('.f-headPhone', f.headPhone);
+      sv('.f-headEducation', f.headEducation); sv('.f-headOccupation', f.headOccupation);
+      sv('.f-headGender', f.headGender);
+      var mg = b.querySelector('.f-headMarital');
+      famSetMaritalOptions(mg, f.headGender);
+      if (mg) mg.value = f.headMarital || '';
+      famToggleMarital(mg);
+      var wc = b.querySelector('.f-wifeCount');
+      if (wc) wc.value = (f.wives && f.wives.length) || 0;
+      famGenWives(wc);
+      var wEls = b.querySelectorAll('.f-wivesContainer .member-block');
+      for (var w = 0; w < wEls.length; w++) {
+        var wd = f.wives[w]; if (!wd) continue;
+        if (wEls[w].querySelector('.w-name')) wEls[w].querySelector('.w-name').value = wd.name || '';
+        if (wEls[w].querySelector('.w-surname')) wEls[w].querySelector('.w-surname').value = wd.surname || '';
+        if (wEls[w].querySelector('.w-birth')) wEls[w].querySelector('.w-birth').value = wd.birth || '';
+        if (wEls[w].querySelector('.w-education')) wEls[w].querySelector('.w-education').value = wd.education || 'بلا';
+        if (wEls[w].querySelector('.w-life')) wEls[w].querySelector('.w-life').value = wd.life || 'حي';
+      }
+      var xwc = b.querySelector('.f-exWifeCount');
+      if (xwc) xwc.value = (f.exWives && f.exWives.length) || 0;
+      famGenExWives(xwc);
+      var xwEls = b.querySelectorAll('.f-exWivesContainer .member-block');
+      for (var xw = 0; xw < xwEls.length; xw++) {
+        var xwd = f.exWives[xw]; if (!xwd) continue;
+        if (xwEls[xw].querySelector('.xw-name')) xwEls[xw].querySelector('.xw-name').value = xwd.name || '';
+        if (xwEls[xw].querySelector('.xw-surname')) xwEls[xw].querySelector('.xw-surname').value = xwd.surname || '';
+        if (xwEls[xw].querySelector('.xw-status')) xwEls[xw].querySelector('.xw-status').value = xwd.status || 'بلا';
+      }
+      sv('.f-husbandName', f.husbandName); sv('.f-husbandSurname', f.husbandSurname);
+      sv('.f-husbandBirth', f.husbandBirth); sv('.f-husbandEducation', f.husbandEducation);
+      sv('.f-husbandOccupation', f.husbandOccupation); sv('.f-husbandPhone', f.husbandPhone);
+      var xhc = b.querySelector('.f-exHusbandCount');
+      if (xhc) xhc.value = (f.exHusbands && f.exHusbands.length) || 0;
+      famGenExHusbands(xhc);
+      var xhEls = b.querySelectorAll('.f-exHusbandsContainer .member-block');
+      for (var xh = 0; xh < xhEls.length; xh++) {
+        var xhd = f.exHusbands[xh]; if (!xhd) continue;
+        if (xhEls[xh].querySelector('.xh-name')) xhEls[xh].querySelector('.xh-name').value = xhd.name || '';
+        if (xhEls[xh].querySelector('.xh-surname')) xhEls[xh].querySelector('.xh-surname').value = xhd.surname || '';
+        if (xhEls[xh].querySelector('.xh-status')) xhEls[xh].querySelector('.xh-status').value = xhd.status || 'بلا';
+      }
+      var mc = b.querySelector('.f-membersCount');
+      if (mc) mc.value = (f.members && f.members.length) || 0;
+      famGenMembers(mc);
+      var mEls = b.querySelectorAll('.f-membersContainer .member-block');
+      for (var m = 0; m < mEls.length; m++) {
+        var md = f.members[m]; if (!md) continue;
+        var mb = mEls[m];
+        function smv(cls, val){ var e = mb.querySelector(cls); if (e) e.value = val == null ? '' : val; }
+        smv('.m-name', md.name); smv('.m-surname', md.surname);
+        smv('.m-relation', md.relation); smv('.m-age', md.age);
+        smv('.m-mother', md.mother); smv('.m-birth', md.birth);
+        smv('.m-education', md.education); smv('.m-occupation', md.occupation);
+        if (md.parentStatus && md.parentStatus.length) {
+          var cbs = mb.querySelectorAll('.ps-cb');
+          for (var c = 0; c < cbs.length; c++) cbs[c].checked = md.parentStatus.indexOf(cbs[c].getAttribute('data-ps')) !== -1;
+        }
+      }
+      sv('.f-notes', f.notes);
+    }
+    updateGrandTotal();
+    updateProgress();
+  }, 100);
+  closeModal('savedModal');
+  showToast('📂 تم تحميل السجل');
+}
+function deleteRecord(id){
+  if (!confirm('حذف السجل؟')) return;
+  var arr = [];
+  for (var i = 0; i < records.length; i++) if (records[i].id !== id) arr.push(records[i]);
+  records = arr;
+  try { localStorage.setItem('azhar_records', JSON.stringify(records)); } catch(e){}
+  openSavedModal();
+  showToast('🗑️ تم الحذف');
+}
+function exportProject(){
+  var payload = { version: '2.0', exportedAt: new Date().toISOString(), records: records };
+  var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'مشروع-أزهر-' + new Date().toISOString().slice(0, 10) + '.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('📤 تم تصدير ' + records.length + ' سجل');
+}
+function importProject(){
+  var f = el('importFile');
+  if (!f) return;
+  f.value = '';
+  f.onchange = function(e){
+    var file = e.target.files[0]; if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      try {
+        var data = JSON.parse(ev.target.result);
+        var list = Array.isArray(data) ? data : (data.records || []);
+        if (!Array.isArray(list)) throw new Error('bad');
+        var added = 0, skipped = 0, conflicts = [];
+        for (var i = 0; i < list.length; i++) {
+          var rec = list[i];
+          var exists = false;
+          for (var j = 0; j < records.length; j++) if (records[j].id === rec.id) { exists = true; break; }
+          if (exists) { skipped++; continue; }
+          var dupConf = validateDuplicates(rec, null);
+          if (dupConf.length > 0) {
+            conflicts.push('سجل "' + (rec.inventoryStart || '—') + '": ' + dupConf[0]);
+            records.push(rec);
+            added++;
+          } else {
+            records.push(rec);
+            added++;
+          }
+        }
+        try { localStorage.setItem('azhar_records', JSON.stringify(records)); } catch(err){}
+        var msg = '📥 تم استيراد ' + added + ' سجل جديد';
+        if (skipped > 0) msg += ' — تم تجاهل ' + skipped + ' مكرر';
+        showToast(msg);
+        if (conflicts.length > 0) {
+          var box = el('conflictsBox');
+          if (box) {
+            var hb = '<strong>⚠️ تنبيهات عند الاستيراد:</strong><ul>';
+            for (var c = 0; c < Math.min(conflicts.length, 10); c++) hb += '<li>' + escapeHtml(conflicts[c]) + '</li>';
+            if (conflicts.length > 10) hb += '<li>و ' + (conflicts.length - 10) + ' تنبيه آخر...</li>';
+            hb += '</ul><p style="margin-top:8px;font-size:.78rem;opacity:.85">تم الاستيراد مع التنبيه. راجع السجلات المكررة يدوياً.</p>';
+            box.innerHTML = hb;
+            openModal('conflictsModal');
+          }
+        }
+        openSavedModal();
+      } catch(err) { showToast('ملف غير صالح', 'error'); }
+    };
+    reader.readAsText(file);
+  };
+  f.click();
+}
+function getCheckedRadio(name){ var e = document.querySelector('input[name="' + name + '"]:checked'); return e ? e.value : ''; }
+function openPrintModal(){
+  if (records.length === 0) { showToast('لا توجد سجلات', 'error'); return; }
+  openModal('printModal');
+}
+</script>
+  <script>
+/* ========== دوال الطباعة المشتركة (معدّلة) ========== */
+function buildPrintCSS(){
+  return ''
+    + 'html,body{margin:0;padding:0;background:#fff;color:#000;direction:rtl;font-family:"Cairo",Tahoma,Arial,sans-serif}'
+    + '.print-page{page-break-after:always;padding:20px;background:#fff;min-height:auto;box-sizing:border-box}'
+    + '.print-page:last-child{page-break-after:auto}'
+    + '.print-header{text-align:center;border-bottom:3px double #d4a017;padding-bottom:10px;margin-bottom:15px}'
+    + '.print-header h1{font-size:20px;color:#1e3a8a;margin:0 0 4px 0}'
+    + '.print-header h2{font-size:14px;color:#8b3a1f;font-weight:600;margin:0}'
+    + '.print-section{margin-bottom:12px;border:1px solid #d4a017;border-radius:6px;padding:8px 12px}'
+    + '.print-section h3{font-size:13px;color:#1e3a8a;margin:0 0 6px 0;border-bottom:1px solid #eee;padding-bottom:4px}'
+    + '.print-row{display:flex;flex-wrap:wrap;gap:8px;font-size:11px;margin-bottom:4px}'
+    + '.print-row .item{flex:1;min-width:45%}'
+    + '.print-row .item strong{color:#1e3a8a}'
+    + '.print-table{width:100%;border-collapse:collapse;font-size:10px;margin-top:6px}'
+    + '.print-table th,.print-table td{border:1px solid #999;padding:3px 5px;text-align:center}'
+    + '.print-table th{background:#f0c75e;color:#000;font-weight:700}'
+    + '.print-footer{margin-top:20px;padding-top:10px;border-top:1px solid #d4a017;text-align:center;font-size:10px;color:#8b3a1f;font-style:italic}'
+    + '.print-meta{font-size:10px;color:#666;text-align:center;margin-top:4px}'
+    + '@page{size:A4;margin:12mm}';
+}
+function doPrintHTML(innerHTML){
+  if (!innerHTML || !innerHTML.trim()) { showToast('لا يوجد محتوى للطباعة', 'error'); return; }
+  // إزالة أي iframe سابق
+  var oldFrame = document.getElementById('azharPrintFrame');
+  if (oldFrame && oldFrame.parentNode) oldFrame.parentNode.removeChild(oldFrame);
+
+  var iframe = document.createElement('iframe');
+  iframe.id = 'azharPrintFrame';
+  iframe.style.position = 'fixed';
+  iframe.style.right = '0';
+  iframe.style.bottom = '0';
+  iframe.style.width = '0';
+  iframe.style.height = '0';
+  iframe.style.border = '0';
+  iframe.style.visibility = 'hidden';
+  document.body.appendChild(iframe);
+
+  var doc = iframe.contentWindow.document;
+  doc.open();
+  doc.write('<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>طباعة</title><style>' + buildPrintCSS() + '</style></head><body>' + innerHTML + '</body></html>');
+  doc.close();
+
+  var tryPrint = function(){
+    try {
+      iframe.contentWindow.focus();
+      iframe.contentWindow.print();
+    } catch(e) {
+      fallbackPrint(innerHTML);
+    }
+  };
+
+  // انتظر تحميل الخطوط/المحتوى ثم اطبع
+  if (iframe.contentWindow.document.readyState === 'complete') {
+    setTimeout(tryPrint, 350);
+  } else {
+    iframe.onload = function(){ setTimeout(tryPrint, 350); };
+  }
+}
+function fallbackPrint(innerHTML){
+  // خطة بديلة: عرض المحتوى داخل نافذة جديدة (قد تعمل في بعض المتصفحات)
+  try {
+    var w = window.open('', '_blank');
+    if (w) {
+      w.document.write('<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>طباعة</title><style>' + buildPrintCSS() + '</style></head><body>' + innerHTML + '</body></html>');
+      w.document.close();
+      setTimeout(function(){ try { w.focus(); w.print(); } catch(e2){} }, 400);
+      return;
+    }
+  } catch(e){}
+  // إذا فشل كل شيء: عرض رسالة
+  showToast('تعذّر فتح نافذة الطباعة. جرّب من متصفح كامل.', 'error');
+}
+
+function parentStatusLabel(key){
+  for (var i = 0; i < PARENT_STATUS_OPTIONS.length; i++) if (PARENT_STATUS_OPTIONS[i].key === key) return PARENT_STATUS_OPTIONS[i].label;
+  return key;
+}
+function buildRecordPrintHTML(rec, foot){
+  var html = '<div class="print-page"><div class="print-header"><h1>🏛️ استمارة المهندس أزهر</h1><h2>استمارة جرد</h2></div>';
+  html += '<div class="print-section"><h3>📋 معلومات</h3><div class="print-row">';
+  html += '<div class="item"><strong>المختار:</strong> ' + escapeHtml(rec.surveyorName||'—') + '</div>';
+  html += '<div class="item"><strong>تاريخ التنظيم:</strong> ' + escapeHtml(rec.formDate||'—') + '</div>';
+  html += '<div class="item"><strong>رقم الجرد:</strong> ' + escapeHtml(rec.inventoryStart||'—') + '</div>';
+  html += '<div class="item"><strong>المحافظة:</strong> ' + escapeHtml(rec.governorate||'—') + '</div>';
+  html += '<div class="item"><strong>القضاء:</strong> ' + escapeHtml(rec.district||'—') + '</div>';
+  html += '<div class="item"><strong>الحي:</strong> ' + escapeHtml(rec.neighborhood||'—') + '</div>';
+  html += '<div class="item"><strong>نوع المنشأ:</strong> ' + escapeHtml(rec.buildingType||'—') + '</div>';
+  html += '</div></div>';
+  if (rec.buildingType === 'مبنى تجاري') {
+    html += '<div class="print-section"><h3>🏪 تفاصيل تجارية</h3><div class="print-row">';
+    html += '<div class="item"><strong>نمط الحيازة:</strong> ' + escapeHtml(rec.commercialSubType||'—') + '</div>';
+    html += '<div class="item"><strong>النوع:</strong> ' + escapeHtml(rec.commercialType||'—') + '</div>';
+    html += '<div class="item"><strong>التفاصيل:</strong> ' + escapeHtml(rec.commercialSubOptions||'—') + '</div>';
+    html += '</div></div>';
+    if (rec.landlordName) {
+      html += '<div class="print-section"><h3>👤 صاحب الملك</h3><div class="print-row">';
+      html += '<div class="item"><strong>الاسم:</strong> ' + escapeHtml(rec.landlordName) + '</div>';
+      html += '<div class="item"><strong>اللقب:</strong> ' + escapeHtml(rec.landlordSurname||'—') + '</div>';
+      html += '<div class="item"><strong>الهوية:</strong> ' + escapeHtml(rec.landlordId||'—') + '</div>';
+      html += '<div class="item"><strong>الهاتف:</strong> ' + escapeHtml(rec.landlordPhone||'—') + '</div>';
+      html += '<div class="item"><strong>العمل:</strong> ' + escapeHtml(rec.landlordOccupation||'—') + '</div>';
+      html += '</div></div>';
+    }
+    if (rec.tenantName) {
+      html += '<div class="print-section"><h3>👥 المؤجر</h3><div class="print-row">';
+      html += '<div class="item"><strong>الاسم:</strong> ' + escapeHtml(rec.tenantName) + '</div>';
+      html += '<div class="item"><strong>اللقب:</strong> ' + escapeHtml(rec.tenantSurname||'—') + '</div>';
+      html += '<div class="item"><strong>الهوية:</strong> ' + escapeHtml(rec.tenantId||'—') + '</div>';
+      html += '<div class="item"><strong>الهاتف:</strong> ' + escapeHtml(rec.tenantPhone||'—') + '</div>';
+      html += '</div></div>';
+    }
+  } else {
+    html += '<div class="print-section"><h3>🏠 الدار السكني</h3><div class="print-row">';
+    html += '<div class="item"><strong>حيازة الأرض:</strong> ' + escapeHtml(rec.landOwnership||'—') + '</div>';
+    html += '<div class="item"><strong>الكنية:</strong> ' + escapeHtml(rec.houseNickname||'—') + '</div>';
+    html += '<div class="item"><strong>عدد العوائل:</strong> ' + (rec.families ? rec.families.length : 0) + '</div>';
+    html += '</div></div>';
+    var fams = rec.families || [];
+    for (var fi = 0; fi < fams.length; fi++) {
+      var f = fams[fi];
+      html += '<div class="print-section"><h3>🏠 العائلة ' + (fi+1) + ' — ' + escapeHtml(f.headName||'—') + '</h3><div class="print-row">';
+      html += '<div class="item"><strong>بطاقة السكن:</strong> ' + escapeHtml(f.housingCard||'—') + '</div>';
+      html += '<div class="item"><strong>التمويني:</strong> ' + escapeHtml(f.rationNumber||'—') + '</div>';
+      html += '<div class="item"><strong>اللقب:</strong> ' + escapeHtml(f.headSurname||'—') + '</div>';
+      html += '<div class="item"><strong>العمر:</strong> ' + escapeHtml(f.headAge||'—') + '</div>';
+      html += '<div class="item"><strong>الأم:</strong> ' + escapeHtml(f.headMother||'—') + '</div>';
+      html += '<div class="item"><strong>التولد:</strong> ' + escapeHtml(f.headBirth||'—') + '</div>';
+      html += '<div class="item"><strong>الهاتف:</strong> ' + escapeHtml(f.headPhone||'—') + '</div>';
+      html += '<div class="item"><strong>الدراسة:</strong> ' + escapeHtml(f.headEducation||'—') + '</div>';
+      html += '<div class="item"><strong>العمل:</strong> ' + escapeHtml(f.headOccupation||'—') + '</div>';
+      html += '<div class="item"><strong>الحالة:</strong> ' + escapeHtml(f.headMarital||'—') + ' — ' + escapeHtml(f.headGender||'—') + '</div>';
+      html += '</div>';
+      if (f.wives && f.wives.length) {
+        html += '<table class="print-table"><thead><tr><th>#</th><th>الزوجة</th><th>اللقب</th><th>التولد</th><th>الدراسة</th><th>الحالة</th></tr></thead><tbody>';
+        for (var wi = 0; wi < f.wives.length; wi++) {
+          var w = f.wives[wi];
+          html += '<tr><td>' + (wi+1) + '</td><td>' + escapeHtml(w.name||'—') + '</td><td>' + escapeHtml(w.surname||'—') + '</td><td>' + escapeHtml(w.birth||'—') + '</td><td>' + escapeHtml(w.education||'—') + '</td><td>' + escapeHtml(w.life||'—') + '</td></tr>';
+        }
+        html += '</tbody></table>';
+      }
+      if (f.members && f.members.length) {
+        html += '<table class="print-table"><thead><tr><th>#</th><th>الاسم</th><th>اللقب</th><th>القرابة</th><th>العمر</th><th>الأم</th><th>التولد</th><th>الدراسة</th><th>العمل</th><th>حالة الوالدين</th></tr></thead><tbody>';
+        for (var mi = 0; mi < f.members.length; mi++) {
+          var m = f.members[mi];
+          var ps = (m.parentStatus || []).map(parentStatusLabel).join('، ') || '—';
+          html += '<tr><td>' + (mi+1) + '</td><td>' + escapeHtml(m.name||'—') + '</td><td>' + escapeHtml(m.surname||'—') + '</td><td>' + escapeHtml(m.relation||'—') + '</td><td>' + escapeHtml(m.age||'—') + '</td><td>' + escapeHtml(m.mother||'—') + '</td><td>' + escapeHtml(m.birth||'—') + '</td><td>' + escapeHtml(m.education||'—') + '</td><td>' + escapeHtml(m.occupation||'—') + '</td><td>' + escapeHtml(ps) + '</td></tr>';
+        }
+        html += '</tbody></table>';
+      }
+      if (f.notes) html += '<p style="font-size:11px;margin-top:6px"><strong>ملاحظات:</strong> ' + escapeHtml(f.notes) + '</p>';
+      html += '</div>';
+    }
+  }
+  if (rec.notes) html += '<div class="print-section"><h3>📝 ملاحظات عامة</h3><p style="font-size:11px">' + escapeHtml(rec.notes) + '</p></div>';
+  html += '<div class="print-footer">' + foot + '</div><div class="print-meta">' + new Date().toLocaleString('ar-IQ') + '</div></div>';
+  return html;
+}
+function executePrint(){
+  var pt = getCheckedRadio('printType') || 'full';
+  var ef = getCheckedRadio('printEmployee') || 'no';
+  var sf = getCheckedRadio('printStudent') || 'no';
+  var af = getCheckedRadio('printEarner') || 'no';
+  var filtered = records.slice();
+  function hasOcc(r, occ){
+    var fams = r.families || [];
+    for (var i = 0; i < fams.length; i++) {
+      if (fams[i].headOccupation === occ) return true;
+      for (var j = 0; j < (fams[i].members||[]).length; j++) if (fams[i].members[j].occupation === occ) return true;
+    }
+    return false;
+  }
+  if (ef === 'yes') filtered = filtered.filter(function(r){ return hasOcc(r, 'موظف'); });
+  if (sf === 'yes') filtered = filtered.filter(function(r){ return hasOcc(r, 'طالب'); });
+  if (af === 'yes') filtered = filtered.filter(function(r){ return hasOcc(r, 'كاسب'); });
+  if (filtered.length === 0) { showToast('لا نتائج', 'error'); return; }
+  var foot = 'تم تصميم هذا الموقع تطوعاً بواسطة المهندس أزهر باسم محمد — دعماً للاستقرار المجتمعي 🇮🇶';
+  var html = '';
+  if (pt === 'names') {
+    html += '<div class="print-page"><div class="print-header"><h1>🏛️ استمارة المهندس أزهر</h1><h2>قائمة أسماء أرباب الأسر</h2></div>';
+    html += '<table class="print-table"><thead><tr><th>#</th><th>رقم الجرد</th><th>المختار</th><th>الاسم</th><th>اللقب</th><th>المحافظة</th><th>الهاتف</th></tr></thead><tbody>';
+    for (var i = 0; i < filtered.length; i++) {
+      var r = filtered[i];
+      var fam = (r.families && r.families[0]) || {};
+      html += '<tr><td>' + (i+1) + '</td><td>' + escapeHtml(r.inventoryStart||'—') + '</td><td>' + escapeHtml(r.surveyorName||'—') + '</td><td>' + escapeHtml(fam.headName||'—') + '</td><td>' + escapeHtml(fam.headSurname||'—') + '</td><td>' + escapeHtml(r.governorate||'—') + '</td><td>' + escapeHtml(fam.headPhone||'—') + '</td></tr>';
+    }
+    html += '</tbody></table><div class="print-footer">' + foot + '</div></div>';
+  } else if (pt === 'count') {
+    html += '<div class="print-page"><div class="print-header"><h1>🏛️ استمارة المهندس أزهر</h1><h2>حسب عدد الأفراد</h2></div>';
+    html += '<table class="print-table"><thead><tr><th>#</th><th>رقم الجرد</th><th>المحافظة</th><th>عدد العوائل</th></tr></thead><tbody>';
+    for (var k = 0; k < filtered.length; k++) {
+      var rr = filtered[k];
+      html += '<tr><td>' + (k+1) + '</td><td>' + escapeHtml(rr.inventoryStart||'—') + '</td><td>' + escapeHtml(rr.governorate||'—') + '</td><td>' + (rr.families ? rr.families.length : 0) + '</td></tr>';
+    }
+    html += '</tbody></table><div class="print-footer">' + foot + '</div></div>';
+  } else {
+    for (var n = 0; n < filtered.length; n++) html += buildRecordPrintHTML(filtered[n], foot);
+  }
+  el('printArea').innerHTML = html;
+  closeModal('printModal');
+  doPrintHTML(html);
+}
+function openReportsModal(){
+  if (records.length === 0) { showToast('لا توجد سجلات', 'error'); return; }
+  openModal('reportsModal');
+}
+function recordMatchesFilter(rec, filterKey){
+  var fams = rec.families || [];
+  switch(filterKey){
+    case 'commercial': return rec.buildingType === 'مبنى تجاري';
+    case 'residential': return rec.buildingType === 'دار سكني';
+    case 'tabu': return rec.commercialSubType === 'ملك طابو صرف' || rec.landOwnership === 'ملك طابو صرف';
+    case 'rented': return rec.commercialSubType === 'مؤجر';
+    case 'hayaza': return rec.commercialSubType === 'حيازة أرض سكنية' || rec.landOwnership === 'حيازة أرض سكنية';
+    case 'zirai': return rec.commercialSubType === 'زراعي' || rec.landOwnership === 'زراعي';
+    case 'mutajawiz': return rec.commercialSubType === 'متجاوز' || rec.landOwnership === 'متجاوز';
+    case 'surghflia': return rec.commercialSubType === 'سرقفلية' || rec.landOwnership === 'سرقفلية';
+    case 'employees': return fams.some(function(f){ if (f.headOccupation === 'موظف') return true; return (f.members||[]).some(function(m){ return m.occupation === 'موظف'; }); });
+    case 'students': return fams.some(function(f){ if (f.headOccupation === 'طالب') return true; return (f.members||[]).some(function(m){ return m.occupation === 'طالب'; }); });
+    case 'earners': return fams.some(function(f){ if (f.headOccupation === 'كاسب') return true; return (f.members||[]).some(function(m){ return m.occupation === 'كاسب'; }); });
+    case 'unemployed': return fams.some(function(f){ if (f.headOccupation === 'عاطل') return true; return (f.members||[]).some(function(m){ return m.occupation === 'عاطل'; }); });
+    case 'widows': return fams.some(function(f){ return f.headMarital === 'أرمل' || f.headMarital === 'أرملة'; });
+    case 'divorced': return fams.some(function(f){ return f.headMarital === 'مطلق' || f.headMarital === 'مطلقة' || f.headMarital === 'منفصل' || f.headMarital === 'منفصلة'; });
+    case 'orphans-father': return fams.some(function(f){ return (f.members||[]).some(function(m){ var ps = m.parentStatus || []; return ps.indexOf('father-dead') !== -1 || ps.indexOf('father-martyr') !== -1; }); });
+    case 'orphans-mother': return fams.some(function(f){ return (f.members||[]).some(function(m){ var ps = m.parentStatus || []; return ps.indexOf('mother-dead') !== -1; }); });
+    case 'many-members': return fams.some(function(f){ return (f.familyTotal || 0) > 5; });
+    case 'many-wives': return fams.some(function(f){ return (f.wives && f.wives.length) >= 2; });
+    case 'many-families': return (rec.families && rec.families.length) > 3;
+  }
+  return false;
+}
+function executeReport(){
+  var rtype = getCheckedRadio('reportType') || 'full';
+  var filters = [];
+  var cbs = document.querySelectorAll('.rf:checked');
+  for (var i = 0; i < cbs.length; i++) filters.push(cbs[i].value);
+  var filtered = records.slice();
+  if (filters.length > 0) filtered = filtered.filter(function(r){ for (var f = 0; f < filters.length; f++) if (recordMatchesFilter(r, filters[f])) return true; return false; });
+  if (filtered.length === 0) { showToast('لا نتائج مطابقة', 'error'); return; }
+  var foot = 'تم تصميم هذا الموقع تطوعاً بواسطة المهندس أزهر باسم محمد — دعماً للاستقرار المجتمعي 🇮🇶';
+  var html = '';
+  if (rtype === 'progress') {
+    html += '<div class="print-page"><div class="print-header"><h1>🏛️ استمارة المهندس أزهر</h1><h2>تقرير تقدم المشروع</h2></div>';
+    html += '<div class="print-section"><h3>📊 ملخص عام</h3><div class="print-row">';
+    html += '<div class="item"><strong>عدد السجلات:</strong> ' + filtered.length + '</div>';
+    html += '<div class="item"><strong>عدد المنشآت التجارية:</strong> ' + filtered.filter(function(r){ return r.buildingType === 'مبنى تجاري'; }).length + '</div>';
+    html += '<div class="item"><strong>عدد الدور السكنية:</strong> ' + filtered.filter(function(r){ return r.buildingType === 'دار سكني'; }).length + '</div>';
+    var totalFam = 0, totalInd = 0;
+    for (var i = 0; i < filtered.length; i++) {
+      var fams = filtered[i].families || [];
+      totalFam += fams.length;
+      for (var j = 0; j < fams.length; j++) totalInd += fams[j].familyTotal || 0;
+    }
+    html += '<div class="item"><strong>إجمالي العوائل:</strong> ' + totalFam + '</div>';
+    html += '<div class="item"><strong>إجمالي الأفراد:</strong> ' + totalInd + '</div>';
+    html += '</div></div>';
+    html += '<table class="print-table"><thead><tr><th>التسلسل</th><th>رقم تسجيل العائلة (الجرد)</th><th>المختار</th><th>المحافظة</th><th>نوع المنشأ</th><th>عدد العوائل</th><th>إجمالي الأفراد</th><th>تاريخ الحفظ</th></tr></thead><tbody>';
+    for (var k = 0; k < filtered.length; k++) {
+      var r = filtered[k];
+      var fams2 = r.families || [];
+      var indCount = 0;
+      for (var x = 0; x < fams2.length; x++) indCount += fams2[x].familyTotal || 0;
+      html += '<tr><td>' + (k+1) + '</td><td>' + escapeHtml(r.inventoryStart||'—') + '</td><td>' + escapeHtml(r.surveyorName||'—') + '</td><td>' + escapeHtml(r.governorate||'—') + '</td><td>' + escapeHtml(r.buildingType||'—') + '</td><td>' + fams2.length + '</td><td>' + indCount + '</td><td>' + escapeHtml(r.savedAt||'—') + '</td></tr>';
+    }
+    html += '</tbody></table><div class="print-footer">' + foot + '</div><div class="print-meta">' + new Date().toLocaleString('ar-IQ') + '</div></div>';
+  } else if (rtype === 'summary') {
+    html += '<div class="print-page"><div class="print-header"><h1>🏛️ استمارة المهندس أزهر</h1><h2>تقرير ملخّص</h2></div>';
+    if (filters.length) html += '<p style="font-size:11px;margin-bottom:8px"><strong>الفلاتر:</strong> ' + filters.join('، ') + '</p>';
+    html += '<table class="print-table"><thead><tr><th>#</th><th>رقم الجرد</th><th>المحافظة</th><th>القضاء</th><th>نوع المنشأ</th><th>الحيازة</th><th>عدد العوائل</th><th>إجمالي الأفراد</th></tr></thead><tbody>';
+    for (var m = 0; m < filtered.length; m++) {
+      var rec = filtered[m];
+      var fams3 = rec.families || [];
+      var indC = 0;
+      for (var y = 0; y < fams3.length; y++) indC += fams3[y].familyTotal || 0;
+      var hay = rec.buildingType === 'مبنى تجاري' ? (rec.commercialSubType || '—') : (rec.landOwnership || '—');
+      html += '<tr><td>' + (m+1) + '</td><td>' + escapeHtml(rec.inventoryStart||'—') + '</td><td>' + escapeHtml(rec.governorate||'—') + '</td><td>' + escapeHtml(rec.district||'—') + '</td><td>' + escapeHtml(rec.buildingType||'—') + '</td><td>' + escapeHtml(hay) + '</td><td>' + fams3.length + '</td><td>' + indC + '</td></tr>';
+    }
+    html += '</tbody></table><div class="print-footer">' + foot + '</div><div class="print-meta">' + new Date().toLocaleString('ar-IQ') + '</div></div>';
+  } else {
+    for (var n = 0; n < filtered.length; n++) html += buildRecordPrintHTML(filtered[n], foot);
+  }
+  el('printArea').innerHTML = html;
+  closeModal('reportsModal');
+  doPrintHTML(html);
+}
+
+// ====== المعاينة ======
+function openPreviewModal(){
+  if (records.length === 0) { showToast('لا توجد سجلات', 'error'); return; }
+  openModal('previewModal');
+  executePreview();
+}
+function executePreview(){
+  var q = getVal('previewSearch');
+  var filters = [];
+  var cbs = document.querySelectorAll('.pf:checked');
+  for (var i = 0; i < cbs.length; i++) filters.push(cbs[i].value);
+  var filtered = records.slice();
+  if (filters.length > 0) filtered = filtered.filter(function(r){ for (var f = 0; f < filters.length; f++) if (recordMatchesFilter(r, filters[f])) return true; return false; });
+  if (q) filtered = filtered.filter(function(r){ return recordMatchesQuery(r, q, ''); });
+  var box = el('previewResults');
+  if (!box) return;
+  if (filtered.length === 0) { box.innerHTML = '<div class="search-empty">لا توجد نتائج مطابقة</div>'; return; }
+  var h = '<div style="font-size:.8rem;color:var(--gold-light);margin-bottom:8px;font-weight:700">عرض ' + filtered.length + ' سجل</div>';
+  for (var i = 0; i < filtered.length; i++) {
+    var r = filtered[i];
+    var name = getRecordDisplayName(r);
+    h += '<div class="preview-result-item">';
+    h += '<h4>' + escapeHtml(name) + '</h4>';
+    h += '<div class="p-row"><strong>رقم الجرد:</strong> ' + escapeHtml(r.inventoryStart||'—') + '</div>';
+    h += '<div class="p-row"><strong>المختار:</strong> ' + escapeHtml(r.surveyorName||'—') + ' | <strong>التاريخ:</strong> ' + escapeHtml(r.formDate||'—') + '</div>';
+    h += '<div class="p-row"><strong>الموقع:</strong> ' + escapeHtml(r.governorate||'—') + ' - ' + escapeHtml(r.district||'—') + ' - ' + escapeHtml(r.neighborhood||'—') + '</div>';
+    h += '<div class="p-row"><strong>النوع:</strong> ' + escapeHtml(r.buildingType||'—') + '</div>';
+    if (r.buildingType === 'دار سكني') {
+      var fams = r.families || [];
+      h += '<div class="p-row"><strong>عدد العوائل:</strong> ' + fams.length + '</div>';
+      var totalInd = 0;
+      for (var y = 0; y < fams.length; y++) totalInd += fams[y].familyTotal || 0;
+      h += '<div class="p-row"><strong>إجمالي الأفراد:</strong> ' + totalInd + '</div>';
+    }
+    h += '<div class="p-row"><strong>تاريخ الحفظ:</strong> ' + escapeHtml(r.savedAt||'—') + '</div>';
+    h += '<div class="copy-btn-row">';
+    h += '<button type="button" class="btn-load" onclick="loadRecordFromPreview(' + r.id + ')">✏️ فتح للتحرير</button>';
+    h += '<button type="button" class="btn-view" onclick="printSingleRecord(' + r.id + ')">🖨️ طباعة هذه فقط</button>';
+    h += '</div>';
+    h += '</div>';
+  }
+  box.innerHTML = h;
+}
+function loadRecordFromPreview(id){
+  closeModal('previewModal');
+  loadRecord(id);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function printSingleRecord(id){
+  var r = null;
+  for (var i = 0; i < records.length; i++) if (records[i].id === id) { r = records[i]; break; }
+  if (!r) return;
+  var foot = 'تم تصميم هذا الموقع تطوعاً بواسطة المهندس أزهر باسم محمد — دعماً للاستقرار المجتمعي 🇮🇶';
+  var html = buildRecordPrintHTML(r, foot);
+  el('printArea').innerHTML = html;
+  closeModal('previewModal');
+  doPrintHTML(html);
+}
+
+// ====== الأمان ======
+var ADMIN_CODE = '215216';
+function openSecurityGate(){
+  var inp = el('adminPassInput');
+  if (inp) inp.value = '';
+  openModal('adminPassModal');
+}
+function verifyAdminPass(){
+  var v = getVal('adminPassInput');
+  if (v === ADMIN_CODE) {
+    closeModal('adminPassModal');
+    try { setVal('newSurveyorPass', localStorage.getItem('azhar_lock_pass') || ''); } catch(e){}
+    openModal('securityModal');
+  } else {
+    showToast('رمز غير صحيح', 'error');
+  }
+}
+function saveSecuritySettings(){
+  var v = getVal('newSurveyorPass').trim();
+  try {
+    if (v) localStorage.setItem('azhar_lock_pass', v);
+    else localStorage.removeItem('azhar_lock_pass');
+  } catch(e){}
+  closeModal('securityModal');
+  showToast(v ? '🛡️ تم تفعيل قفل التطبيق' : '🔓 تم إلغاء القفل');
+}
+function checkAppLock(){
+  var p = '';
+  try { p = localStorage.getItem('azhar_lock_pass') || ''; } catch(e){}
+  if (p) {
+    var lo = el('lockOverlay');
+    if (lo) lo.classList.add('active');
+  }
+}
+function unlockApp(){
+  var v = getVal('lockPassInput');
+  var p = '';
+  try { p = localStorage.getItem('azhar_lock_pass') || ''; } catch(e){}
+  if (v === p) {
+    var lo = el('lockOverlay');
+    if (lo) lo.classList.remove('active');
+    setVal('lockPassInput', '');
+  } else {
+    showToast('رمز خاطئ', 'error');
+  }
+}
+
+// ====== التشغيل ======
+window.onload = function(){
+  try { var s = localStorage.getItem('azhar_surveyor'); if (s) setVal('surveyorName', s); } catch(e){}
+  initAutoDate();
+  var tri = document.querySelectorAll('.tri-toggle label');
+  for (var i = 0; i < tri.length; i++) {
+    (function(lbl){
+      var inp = lbl.querySelector('input');
+      if (!inp) return;
+      if (inp.checked) lbl.classList.add('active');
+      inp.addEventListener('change', function(){
+        var sib = lbl.parentNode.querySelectorAll('label');
+        for (var j = 0; j < sib.length; j++) sib[j].classList.remove('active');
+        if (inp.checked) lbl.classList.add('active');
+      });
+    })(tri[i]);
+  }
+  var pfCbs = document.querySelectorAll('.pf');
+  for (var p = 0; p < pfCbs.length; p++) pfCbs[p].addEventListener('change', executePreview);
+  document.addEventListener('input', updateProgress);
+  document.addEventListener('change', updateProgress);
+  document.addEventListener('input', function(e){
+    var blk = e.target.closest ? e.target.closest('.family-block') : null;
+    if (blk) updateFamilyTotal(blk);
+  });
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(function(){});
+  checkAppLock();
+  updateProgress();
+};
+</script>
+</body>
+</html>
