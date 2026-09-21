@@ -964,7 +964,7 @@ function buildFamilyBlock(idx){
   h += '<div class="field"><label>تاريخ التولد</label><input type="text" class="f-headBirth" placeholder="مثال: 1980"></div>';
   h += '<div class="field"><label>رقم الهاتف</label><input type="tel" class="f-headPhone" placeholder="07XXXXXXXXX" maxlength="11"></div>';
   h += '<div class="field"><label>التحصيل الدراسي</label><select class="f-headEducation">' + opts(EDUCATION_OPTIONS) + '</select></div>';
-  h += '<div class="field"><label>العمل</label><select class="f-headOccupation">' + opts(OCCUPATION_OPTIONS) + '</select></div>';
+  h += '<div class="field"><label>العمل</label><select class="f-headOccupation" onchange="famToggleMinistry(this)">' + opts(OCCUPATION_OPTIONS) + '</select></div>';
   h += '<div class="field"><label>الجنس</label><select class="f-headGender" onchange="famToggleGender(this)"><option value="">-- اختر --</option><option value="ذكر">ذكر</option><option value="أنثى">أنثى</option><option value="بلا">بلا</option><option value="أخرى">أخرى</option></select></div>';
   h += '<div class="field"><label>الحالة الاجتماعية</label><select class="f-headMarital" onchange="famToggleMarital(this)"><option value="">-- اختر --</option></select></div>';
 
