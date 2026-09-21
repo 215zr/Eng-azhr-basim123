@@ -1130,8 +1130,9 @@ function famGenMembers(sel){
     h += '<div class="field"><label>اسم الأم</label><input type="text" class="m-mother"></div>';
     h += '<div class="field"><label>تاريخ التولد</label><input type="text" class="m-birth"></div>';
     h += '<div class="field"><label>التحصيل الدراسي</label><select class="m-education">' + opts(EDUCATION_OPTIONS) + '</select></div>';
-    h += '<div class="field"><label>العمل</label><select class="m-occupation">' + opts(OCCUPATION_OPTIONS) + '</select></div>';
-    h += buildParentStatusHTML();
+    h += '<div class="field"><label>العمل</label><select class="m-occupation" onchange="famToggleMinistry(this)">' + opts(OCCUPATION_OPTIONS) + '</select></div>';
+    h += buildMinistryFieldHTML('m-ministry');
+       h += buildParentStatusHTML();
     h += '</div>';
     var d = document.createElement('div');
     d.innerHTML = h;
