@@ -690,6 +690,61 @@ var PARENT_STATUS_OPTIONS = [
   { key: 'both-other', label: 'غياب الوالدين لأسباب أخرى' }
 ];
 
+// ====== وزارات وجهات العراق ======
+var MINISTRY_OPTIONS = [
+  'وزارة الداخلية','وزارة الدفاع','وزارة الخارجية','وزارة المالية','وزارة النفط',
+  'وزارة الكهرباء','وزارة التخطيط','وزارة التربية','وزارة التعليم العالي والبحث العلمي',
+  'وزارة الصحة','وزارة العدل','وزارة العمل والشؤون الاجتماعية',
+  'وزارة الإعمار والإسكان والبلديات العامة','وزارة النقل','وزارة الاتصالات',
+  'وزارة الزراعة','وزارة الموارد المائية','وزارة الصناعة والمعادن','وزارة التجارة',
+  'وزارة الثقافة والسياحة والآثار','وزارة الشباب والرياضة','وزارة الهجرة والمهجرين',
+  'وزارة البيئة','وزارة الدولة لشؤون مجلس النواب',
+  'مجلس النواب','رئاسة الوزراء','رئاسة الجمهورية','مجلس القضاء الأعلى',
+  'المفوضية العليا المستقلة للانتخابات','هيئة النزاهة','ديوان الرقابة المالية',
+  'البنك المركزي العراقي','هيئة الحشد الشعبي','جهاز مكافحة الإرهاب',
+  'منظمات خيرية','منظمات حكومية','منظمات حزبية',
+  'مؤسسات دولية (سفارات / قنصليات)','أخرى'
+];
+
+function ministryOpts(sel){
+  var h = '<option value="">-- اختر --</option>';
+  for (var i = 0; i < MINISTRY_OPTIONS.length; i++) {
+    var v = MINISTRY_OPTIONS[i];
+    h += '<option value="' + v + '"' + (v === sel ? ' selected' : '') + '>' + v + '</option>';
+  }
+  return h;
+}
+
+function hasMinistry(occ){
+  return occ === 'موظف' || occ === 'موظف بعقد';
+}
+
+function ministryLabel(occ){
+  return occ === 'موظف بعقد' ? 'عقد لدى وزارة / جهة' : 'موظف لدى وزارة / جهة';
+}
+
+function buildMinistryFieldHTML(cls, val, occ){
+  return '<div class="field ministry-field hidden">' +
+    '<label class="ministry-label">' + ministryLabel(occ) + '</label>' +
+    '<select class="' + cls + '">' + ministryOpts(val) + '</select></div>';
+}
+
+function famToggleMinistry(occSel){
+  var parentField = occSel.closest('.field');
+  if (!parentField) return;
+  var mf = parentField.nextElementSibling;
+  if (!mf || !mf.classList.contains('ministry-field')) return;
+  if (hasMinistry(occSel.value)) {
+    mf.classList.remove('hidden');
+    var lbl = mf.querySelector('.ministry-label');
+    if (lbl) lbl.textContent = ministryLabel(occSel.value);
+  } else {
+    mf.classList.add('hidden');
+    var s = mf.querySelector('select');
+    if (s) s.value = '';
+  }
+       }
+       
 var STORE_OPTIONS = ['مخزن مواد منزلية','مخزن مواد إنشائية','مخزن أجهزة كهربائية','مخزن ملابس','مخزن مواد غذائية','مخزن أثاث','مخزن قطع غيار','مخزن أدوات صحية'];
 var DIRECT_SALE_OPTIONS = ['سوق','فرن','صيدلية','ملابس','بقالة','جزارة','خضار وفواكه','حلويات','مطعم','كافيه','محل هواتف','محل إلكترونيات','مكتبة','أدوات منزلية','محل ألعاب','محل زهور','محل عطور','محل أحذية','محل حقائب','محل ذهب','محل ساعات','محل نظارات','أدوات صحية','كهربائيات','أدوات إنشائية','دهان','زجاج','ألمنيوم','حدادة','نجارة','تبريد وتكييف','غاز','محل وقود','غسيل سيارات','قطع غيار','معرض سيارات','مكتب عقارات'];
 var SERVICES_OPTIONS = ['خدمات طبية وصحية','حلاقة','صيانة الهواتف','صيانة الإلكترونيات','تأجير مواد','تأجير عدد إنشائية','مكتب عقود بيع وشراء','خياطة','كوفي شوب','مطعم','مغسلة ملابس','كوافير','تدليك'];
