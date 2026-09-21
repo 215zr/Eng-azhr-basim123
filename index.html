@@ -965,6 +965,7 @@ function buildFamilyBlock(idx){
   h += '<div class="field"><label>رقم الهاتف</label><input type="tel" class="f-headPhone" placeholder="07XXXXXXXXX" maxlength="11"></div>';
   h += '<div class="field"><label>التحصيل الدراسي</label><select class="f-headEducation">' + opts(EDUCATION_OPTIONS) + '</select></div>';
   h += '<div class="field"><label>العمل</label><select class="f-headOccupation" onchange="famToggleMinistry(this)">' + opts(OCCUPATION_OPTIONS) + '</select></div>';
+     h += buildMinistryFieldHTML('f-headMinistry');
   h += '<div class="field"><label>الجنس</label><select class="f-headGender" onchange="famToggleGender(this)"><option value="">-- اختر --</option><option value="ذكر">ذكر</option><option value="أنثى">أنثى</option><option value="بلا">بلا</option><option value="أخرى">أخرى</option></select></div>';
   h += '<div class="field"><label>الحالة الاجتماعية</label><select class="f-headMarital" onchange="famToggleMarital(this)"><option value="">-- اختر --</option></select></div>';
 
@@ -982,7 +983,8 @@ function buildFamilyBlock(idx){
   h += '<div class="field"><label>اللقب</label><input type="text" class="f-husbandSurname"></div>';
   h += '<div class="field"><label>تاريخ تولد الزوج</label><input type="text" class="f-husbandBirth"></div>';
   h += '<div class="field"><label>التحصيل الدراسي للزوج</label><select class="f-husbandEducation">' + opts(EDUCATION_OPTIONS) + '</select></div>';
-  h += '<div class="field"><label>عمل الزوج</label><select class="f-husbandOccupation">' + opts(OCCUPATION_OPTIONS) + '</select></div>';
+  h += '<div class="field"><label>عمل الزوج</label><select class="f-husbandOccupation" onchange="famToggleMinistry(this)">' + opts(OCCUPATION_OPTIONS) + '</select></div>';
+h += buildMinistryFieldHTML('f-husbandMinistry');
   h += '<div class="field"><label>هاتف الزوج</label><input type="tel" class="f-husbandPhone" placeholder="07XXXXXXXXX" maxlength="11"></div>';
   h += '</div>';
 
@@ -1072,7 +1074,9 @@ function famGenWives(sel){
     h += '<div class="field"><label>اللقب</label><input type="text" class="w-surname"></div>';
     h += '<div class="field"><label>تاريخ التولد</label><input type="text" class="w-birth"></div>';
     h += '<div class="field"><label>التحصيل الدراسي</label><select class="w-education">' + opts(EDUCATION_OPTIONS) + '</select></div>';
-    h += '<div class="field"><label>الحالة</label><select class="w-life">' + opts(['حي','ميت','منفصل','مطلق','أرمل','عازب']) + '</select></div>';
+h += '<div class="field"><label>العمل</label><select class="w-occupation" onchange="famToggleMinistry(this)">' + opts(OCCUPATION_OPTIONS) + '</select></div>';
+h += buildMinistryFieldHTML('w-ministry');
+        h += '<div class="field"><label>الحالة</label><select class="w-life">' + opts(['حي','ميت','منفصل','مطلق','أرمل','عازب']) + '</select></div>';
     h += '</div>';
     var d = document.createElement('div');
     d.innerHTML = h;
@@ -1090,7 +1094,9 @@ function famGenExWives(sel){
     var h = '<div class="member-block"><div class="member-header"><div class="member-title">👩 زوجة سابقة ' + (i+1) + '</div><div class="member-number">' + (i+1) + '</div></div>';
     h += '<div class="field"><label>الاسم</label><input type="text" class="xw-name"></div>';
     h += '<div class="field"><label>اللقب</label><input type="text" class="xw-surname"></div>';
-    h += '<div class="field"><label>السبب / الحالة</label><select class="xw-status">' + opts(EX_SPOUSE_STATUS) + '</select></div></div>';
+    h += '<div class="field"><label>العمل</label><select class="xw-occupation" onchange="famToggleMinistry(this)">' + opts(OCCUPATION_OPTIONS) + '</select></div>';
+h += buildMinistryFieldHTML('xw-ministry');
+       h += '<div class="field"><label>السبب / الحالة</label><select class="xw-status">' + opts(EX_SPOUSE_STATUS) + '</select></div></div>';
     var d = document.createElement('div');
     d.innerHTML = h;
     c.appendChild(d.firstChild);
@@ -1200,19 +1206,23 @@ function collectFamily(block){
     surname: (wEls[i].querySelector('.w-surname') || {}).value || '',
     birth: (wEls[i].querySelector('.w-birth') || {}).value || '',
     education: (wEls[i].querySelector('.w-education') || {}).value || '',
-    life: (wEls[i].querySelector('.w-life') || {}).value || ''
+   occupation: (wEls[i].querySelector('.w-occupation') || {}).value || '',
+ministry: (wEls[i].querySelector('.w-ministry') || {}).value || '',
+       life: (wEls[i].querySelector('.w-life') || {}).value || ''
   });
   var xwEls = block.querySelectorAll('.f-exWivesContainer .member-block');
   for (var j = 0; j < xwEls.length; j++) exWives.push({
     name: (xwEls[j].querySelector('.xw-name') || {}).value || '',
     surname: (xwEls[j].querySelector('.xw-surname') || {}).value || '',
-    status: (xwEls[j].querySelector('.xw-status') || {}).value || ''
+   occupation: (xwEls[j].querySelector('.xw-occupation') || {}).value || '',
+ministry: (xwEls[j].querySelector('.xw-ministry') || {}).value || '',
+       status: (xwEls[j].querySelector('.xw-status') || {}).value || ''
   });
   var xhEls = block.querySelectorAll('.f-exHusbandsContainer .member-block');
   for (var k = 0; k < xhEls.length; k++) exHusbands.push({
     name: (xhEls[k].querySelector('.xh-name') || {}).value || '',
     surname: (xhEls[k].querySelector('.xh-surname') || {}).value || '',
-    status: (xhEls[k].querySelector('.xh-status') || {}).value || ''
+       status: (xhEls[k].querySelector('.xh-status') || {}).value || ''
   });
   var mEls = block.querySelectorAll('.f-membersContainer .member-block');
   for (var x = 0; x < mEls.length; x++) {
@@ -1226,6 +1236,7 @@ function collectFamily(block){
       birth: (mb.querySelector('.m-birth') || {}).value || '',
       education: (mb.querySelector('.m-education') || {}).value || '',
       occupation: (mb.querySelector('.m-occupation') || {}).value || '',
+         ministry: (mb.querySelector('.m-ministry') || {}).value || '',
       parentStatus: collectParentsStatus(mb)
     });
   }
@@ -1240,15 +1251,17 @@ function collectFamily(block){
     headPhone: v('.f-headPhone'),
     headEducation: v('.f-headEducation'),
     headOccupation: v('.f-headOccupation'),
-    headGender: v('.f-headGender'),
+   headMinistry: v('.f-headMinistry'),
+       headGender: v('.f-headGender'),
     headMarital: v('.f-headMarital'),
     husbandName: v('.f-husbandName'),
     husbandSurname: v('.f-husbandSurname'),
     husbandBirth: v('.f-husbandBirth'),
     husbandEducation: v('.f-husbandEducation'),
-    husbandOccupation: v('.f-husbandOccupation'),
+       husbandOccupation: v('.f-husbandOccupation'),
+       husbandMinistry: v('.f-husbandMinistry'),
     husbandPhone: v('.f-husbandPhone'),
-    wives: wives, exWives: exWives, exHusbands: exHusbands, members: members,
+       wives: wives, exWives: exWives, exHusbands: exHusbands, members: members,
     notes: v('.f-notes'),
     familyTotal: (function(){
       var h = v('.f-headName') ? 1 : 0;
@@ -1479,6 +1492,8 @@ function loadRecord(id){
       sv('.f-headAge', f.headAge); sv('.f-headMother', f.headMother);
       sv('.f-headBirth', f.headBirth); sv('.f-headPhone', f.headPhone);
       sv('.f-headEducation', f.headEducation); sv('.f-headOccupation', f.headOccupation);
+         sv('.f-headMinistry', f.headMinistry);
+if (f.headMinistry) famToggleMinistry(b.querySelector('.f-headOccupation'));
       sv('.f-headGender', f.headGender);
       var mg = b.querySelector('.f-headMarital');
       famSetMaritalOptions(mg, f.headGender);
@@ -1495,6 +1510,8 @@ function loadRecord(id){
         if (wEls[w].querySelector('.w-birth')) wEls[w].querySelector('.w-birth').value = wd.birth || '';
         if (wEls[w].querySelector('.w-education')) wEls[w].querySelector('.w-education').value = wd.education || 'بلا';
         if (wEls[w].querySelector('.w-life')) wEls[w].querySelector('.w-life').value = wd.life || 'حي';
+          if (wEls[w].querySelector('.w-occupation')) wEls[w].querySelector('.w-occupation').value = wd.occupation || '';
+if (wEls[w].querySelector('.w-ministry')) wEls[w].querySelector('.w-ministry').value = wd.ministry || ''; 
       }
       var xwc = b.querySelector('.f-exWifeCount');
       if (xwc) xwc.value = (f.exWives && f.exWives.length) || 0;
@@ -1505,8 +1522,12 @@ function loadRecord(id){
         if (xwEls[xw].querySelector('.xw-name')) xwEls[xw].querySelector('.xw-name').value = xwd.name || '';
         if (xwEls[xw].querySelector('.xw-surname')) xwEls[xw].querySelector('.xw-surname').value = xwd.surname || '';
         if (xwEls[xw].querySelector('.xw-status')) xwEls[xw].querySelector('.xw-status').value = xwd.status || 'بلا';
+          if (xwEls[xw].querySelector('.xw-occupation')) xwEls[xw].querySelector('.xw-occupation').value = xwd.occupation || '';
+if (xwEls[xw].querySelector('.xw-ministry')) xwEls[xw].querySelector('.xw-ministry').value = xwd.ministry || ''; 
       }
       sv('.f-husbandName', f.husbandName); sv('.f-husbandSurname', f.husbandSurname);
+        sv('.f-husbandMinistry', f.husbandMinistry);
+if (f.husbandMinistry) famToggleMinistry(b.querySelector('.f-husbandOccupation')); 
       sv('.f-husbandBirth', f.husbandBirth); sv('.f-husbandEducation', f.husbandEducation);
       sv('.f-husbandOccupation', f.husbandOccupation); sv('.f-husbandPhone', f.husbandPhone);
       var xhc = b.querySelector('.f-exHusbandCount');
@@ -1531,6 +1552,7 @@ function loadRecord(id){
         smv('.m-relation', md.relation); smv('.m-age', md.age);
         smv('.m-mother', md.mother); smv('.m-birth', md.birth);
         smv('.m-education', md.education); smv('.m-occupation', md.occupation);
+           smv('.m-ministry', md.ministry);
         if (md.parentStatus && md.parentStatus.length) {
           var cbs = mb.querySelectorAll('.ps-cb');
           for (var c = 0; c < cbs.length; c++) cbs[c].checked = md.parentStatus.indexOf(cbs[c].getAttribute('data-ps')) !== -1;
@@ -1698,21 +1720,39 @@ function buildRecordPrintHTML(rec, foot){
       html += '<div class="item"><strong>الهاتف:</strong> ' + escapeHtml(f.headPhone||'—') + '</div>';
       html += '<div class="item"><strong>الدراسة:</strong> ' + escapeHtml(f.headEducation||'—') + '</div>';
       html += '<div class="item"><strong>العمل:</strong> ' + escapeHtml(f.headOccupation||'—') + '</div>';
+         html += '<div class="item"><strong>الوزارة:</strong> ' + escapeHtml(f.headMinistry||'—') + '</div>';
       html += '<div class="item"><strong>الحالة:</strong> ' + escapeHtml(f.headMarital||'—') + ' — ' + escapeHtml(f.headGender||'—') + '</div>';
       html += '</div>';
+         if (f.husbandName) {
+  html += '<div class="print-section"><h3>👨 معلومات الزوج</h3><div class="print-row">';
+  html += '<div class="item"><strong>الاسم:</strong> ' + escapeHtml(f.husbandName||'—') + '</div>';
+  html += '<div class="item"><strong>اللقب:</strong> ' + escapeHtml(f.husbandSurname||'—') + '</div>';
+  html += '<div class="item"><strong>تاريخ التولد:</strong> ' + escapeHtml(f.husbandBirth||'—') + '</div>';
+  html += '<div class="item"><strong>الدراسة:</strong> ' + escapeHtml(f.husbandEducation||'—') + '</div>';
+  html += '<div class="item"><strong>العمل:</strong> ' + escapeHtml(f.husbandOccupation||'—') + '</div>';
+  html += '<div class="item"><strong>الوزارة:</strong> ' + escapeHtml(f.husbandMinistry||'—') + '</div>';
+  html += '<div class="item"><strong>الهاتف:</strong> ' + escapeHtml(f.husbandPhone||'—') + '</div>';
+  html += '</div></div>';
+}
       if (f.wives && f.wives.length) {
-        html += '<table class="print-table"><thead><tr><th>#</th><th>الزوجة</th><th>اللقب</th><th>التولد</th><th>الدراسة</th><th>الحالة</th></tr></thead><tbody>';
+        html += '<table class="print-table"><thead><tr><th>#</th><th>الزوجة</th><th>اللقب</th><th>التولد</th><th>الدراسة</th><th>العمل</th><th>الوزارة</th><th>الحالة</th></tr></thead><tbody>';
         for (var wi = 0; wi < f.wives.length; wi++) {
           var w = f.wives[wi];
-          html += '<tr><td>' + (wi+1) + '</td><td>' + escapeHtml(w.name||'—') + '</td><td>' + escapeHtml(w.surname||'—') + '</td><td>' + escapeHtml(w.birth||'—') + '</td><td>' + escapeHtml(w.education||'—') + '</td><td>' + escapeHtml(w.life||'—') + '</td></tr>';
+          html += '<tr><td>' + (wi+1) + '</td><td>' + escapeHtml(w.name||'—') + '</td><td>' + escapeHtml(w.surname||'—') + '</td><td>' + escapeHtml(w.birth||'—') + '</td><td>' + escapeHtml(w.education||'—') + '</td>' +
+'<td>' + escapeHtml(w.occupation||'—') + '</td>' +
+'<td>' + escapeHtml(w.ministry||'—') + '</td>' +
+'<td>' + escapeHtml(w.life||'—') + '</td></tr>';
         }
         html += '</tbody></table>';
       }
       if (f.exWives && f.exWives.length) {
-        html += '<table class="print-table"><thead><tr><th>#</th><th>الزوجة السابقة</th><th>اللقب</th><th>السبب/الحالة</th></tr></thead><tbody>';
+        html += '<table class="print-table"><thead><tr><th>#</th><th>الزوجة السابقة</th><th>اللقب</th><th><th>العمل</th><th>الوزارة</th><th>السبب/الحالة</th></tr></thead><tbody>';
         for (var xwi = 0; xwi < f.exWives.length; xwi++) {
           var xw = f.exWives[xwi];
-          html += '<tr><td>' + (xwi+1) + '</td><td>' + escapeHtml(xw.name||'—') + '</td><td>' + escapeHtml(xw.surname||'—') + '</td><td>' + escapeHtml(xw.status||'—') + '</td></tr>';
+          html += '<tr><td>' + (xwi+1) + '</td><td>' + escapeHtml(xw.name||'—') + '</td><td>' + escapeHtml(xw.surname||'—') + '</td>' +
+'<td>' + escapeHtml(xw.occupation||'—') + '</td>' +
+'<td>' + escapeHtml(xw.ministry||'—') + '</td>' +
+'<td>' + escapeHtml(xw.status||'—') + '</td></tr>';
         }
         html += '</tbody></table>';
       }
@@ -1729,7 +1769,15 @@ function buildRecordPrintHTML(rec, foot){
         for (var mi = 0; mi < f.members.length; mi++) {
           var m = f.members[mi];
           var ps = (m.parentStatus || []).map(parentStatusLabel).join('، ') || '—';
-          html += '<tr><td>' + (mi+1) + '</td><td>' + escapeHtml(m.name||'—') + '</td><td>' + escapeHtml(m.surname||'—') + '</td><td>' + escapeHtml(m.relation||'—') + '</td><td>' + escapeHtml(m.age||'—') + '</td><td>' + escapeHtml(m.mother||'—') + '</td><td>' + escapeHtml(m.birth||'—') + '</td><td>' + escapeHtml(m.education||'—') + '</td><td>' + escapeHtml(m.occupation||'—') + '</td><td>' + escapeHtml(ps) + '</td></tr>';
+          html += '<tr><td>' + (mi+1) + '</td><td>' + escapeHtml(m.name||'—') + '</td><td>' + escapeHtml(m.surname||'—') + '</td>' +
+'<td>' + escapeHtml(m.relation||'—') + '</td>' +
+'<td>' + escapeHtml(m.age||'—') + '</td>' +
+'<td>' + escapeHtml(m.mother||'—') + '</td>' +
+'<td>' + escapeHtml(m.birth||'—') + '</td>' +
+'<td>' + escapeHtml(m.education||'—') + '</td>' +
+'<td>' + escapeHtml(m.occupation||'—') + '</td>' +
+'<td>' + escapeHtml(m.ministry||'—') + '</td>' +
+'<td>' + escapeHtml(ps) + '</td></tr>';
         }
         html += '</tbody></table>';
       }
