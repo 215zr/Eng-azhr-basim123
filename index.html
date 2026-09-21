@@ -1856,7 +1856,24 @@ function executePreview(){
       h += '<div class="p-row"><strong>عدد العوائل:</strong> ' + fams.length + '</div>';
       var totalInd = 0;
       for (var y = 0; y < fams.length; y++) totalInd += fams[y].familyTotal || 0;
-    <script>
+    h += '<div class="p-row"><strong>إجمالي الأفراد:</strong> ' + totalInd + '</div>';
+}
+h += '<div class="p-row"><strong>تاريخ الحفظ:</strong> ' + escapeHtml(r.savedAt||'—') + '</div>';
+h += '<div class="copy-btn-row">';
+h += '<button type="button" class="btn-load" onclick="loadRecordFromPreview(' + r.id + ')">✏️ فتح</button>';
+h += '<button type="button" class="btn-view" onclick="printSingleRecord(' + r.id + ')">🖨️ طباعة</button>';
+h += '</div></div>';
+}
+box.innerHTML = h;
+}
+function loadRecordFromPreview(id){closeModal('previewModal');loadRecord(id);window.scrollTo({top:0,behavior:'smooth'});}
+function printSingleRecord(id){var r=null;for(var i=0;i<records.length;i++)if(records[i].id===id){r=records[i];break;}if(!r)return;var html=buildRecordPrintHTML(r,'');el('printArea').innerHTML=html;closeModal('previewModal');showPrintPreview(html);}
+var _pendingPrintHTML='';
+function showPrintPreview(html){_pendingPrintHTML=html;var pb=document.getElementById('printPreviewContent');var pa=document.getElementById('printArea');if(pb)pb.innerHTML=html;if(pa)pa.innerHTML=html;openModal('printPreviewModal');}
+function confirmPrint(){closeModal('printPreviewModal');setTimeout(function(){window.print();},250);}
+function downloadPDF(){showToast('اختر حفظ كـ PDF من نافذة الطباعة');setTimeout(function(){window.print();},600);}
+</script>
+<script>
 // ===================================================
 // الجزء 6 (الأخير): الأمان + القفل + التشغيل + التحديث
 // ===================================================
