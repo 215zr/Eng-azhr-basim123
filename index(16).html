@@ -1985,7 +1985,31 @@ function loadRecordFromPreview(id){closeModal('previewModal');loadRecord(id);win
 function printSingleRecord(id){var r=null;for(var i=0;i<records.length;i++)if(records[i].id===id){r=records[i];break;}if(!r)return;var html=buildRecordPrintHTML(r,'');el('printArea').innerHTML=html;closeModal('previewModal');showPrintPreview(html);}
 var _pendingPrintHTML='';
 function showPrintPreview(html){_pendingPrintHTML=html;var pb=document.getElementById('printPreviewContent');var pa=document.getElementById('printArea');if(pb)pb.innerHTML=html;if(pa)pa.innerHTML=html;openModal('printPreviewModal');}
-function confirmPrint(){closeModal('printPreviewModal');setTimeout(function(){window.print();},250);}
+function confirmPrint(){
+  closeModal('printPreviewModal');
+  var pa = document.getElementById('printArea');
+  if (!pa) return;
+  
+  if (window.html2pdf) {
+    var name = 'azhar-' + new Date().toISOString().slice(0,10) + '-' + Date.now() + '.pdf';
+    showToast('⏳ جاري تجهيز PDF...');
+    html2pdf().set({
+      margin: 5,
+      filename: name,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['css', 'legacy'] }
+    }).from(pa).save().then(function(){
+      showToast('📥 تم حفظ PDF بنجاح');
+    }).catch(function(){
+      showToast('تعذّر إنشاء PDF', 'error');
+    });
+    return;
+  }
+  
+  showToast('المكتبة غير محملة', 'error');
+       }
 function downloadPDF(){showToast('اختر حفظ كـ PDF من نافذة الطباعة');setTimeout(function(){window.print();},600);}
 </script>
 <script>
