@@ -1525,11 +1525,11 @@ if (wEls[w].querySelector('.w-ministry')) wEls[w].querySelector('.w-ministry').v
           if (xwEls[xw].querySelector('.xw-occupation')) xwEls[xw].querySelector('.xw-occupation').value = xwd.occupation || '';
 if (xwEls[xw].querySelector('.xw-ministry')) xwEls[xw].querySelector('.xw-ministry').value = xwd.ministry || ''; 
       }
-      sv('.f-husbandName', f.husbandName); sv('.f-husbandSurname', f.husbandSurname);
-        sv('.f-husbandMinistry', f.husbandMinistry);
-if (f.husbandMinistry) famToggleMinistry(b.querySelector('.f-husbandOccupation')); 
+sv('.f-husbandName', f.husbandName); sv('.f-husbandSurname', f.husbandSurname);
       sv('.f-husbandBirth', f.husbandBirth); sv('.f-husbandEducation', f.husbandEducation);
       sv('.f-husbandOccupation', f.husbandOccupation); sv('.f-husbandPhone', f.husbandPhone);
+         sv('.f-husbandMinistry', f.husbandMinistry);
+if (f.husbandMinistry) famToggleMinistry(b.querySelector('.f-husbandOccupation'));
       var xhc = b.querySelector('.f-exHusbandCount');
       if (xhc) xhc.value = (f.exHusbands && f.exHusbands.length) || 0;
       famGenExHusbands(xhc);
@@ -1746,7 +1746,7 @@ function buildRecordPrintHTML(rec, foot){
         html += '</tbody></table>';
       }
       if (f.exWives && f.exWives.length) {
-        html += '<table class="print-table"><thead><tr><th>#</th><th>الزوجة السابقة</th><th>اللقب</th><th><th>العمل</th><th>الوزارة</th><th>السبب/الحالة</th></tr></thead><tbody>';
+        html += '<table class="print-table"><thead><tr><th>#</th><th>الزوجة السابقة</th><th>اللقب</th><th>العمل</th><th>الوزارة</th><th>السبب/الحالة</th></tr></thead><tbody>';
         for (var xwi = 0; xwi < f.exWives.length; xwi++) {
           var xw = f.exWives[xwi];
           html += '<tr><td>' + (xwi+1) + '</td><td>' + escapeHtml(xw.name||'—') + '</td><td>' + escapeHtml(xw.surname||'—') + '</td>' +
