@@ -1512,6 +1512,7 @@ if (f.headMinistry) famToggleMinistry(b.querySelector('.f-headOccupation'));
         if (wEls[w].querySelector('.w-life')) wEls[w].querySelector('.w-life').value = wd.life || 'حي';
           if (wEls[w].querySelector('.w-occupation')) wEls[w].querySelector('.w-occupation').value = wd.occupation || '';
 if (wEls[w].querySelector('.w-ministry')) wEls[w].querySelector('.w-ministry').value = wd.ministry || ''; 
+           if (wd.occupation) famToggleMinistry(wEls[w].querySelector('.w-occupation'));
       }
       var xwc = b.querySelector('.f-exWifeCount');
       if (xwc) xwc.value = (f.exWives && f.exWives.length) || 0;
@@ -1524,6 +1525,7 @@ if (wEls[w].querySelector('.w-ministry')) wEls[w].querySelector('.w-ministry').v
         if (xwEls[xw].querySelector('.xw-status')) xwEls[xw].querySelector('.xw-status').value = xwd.status || 'بلا';
           if (xwEls[xw].querySelector('.xw-occupation')) xwEls[xw].querySelector('.xw-occupation').value = xwd.occupation || '';
 if (xwEls[xw].querySelector('.xw-ministry')) xwEls[xw].querySelector('.xw-ministry').value = xwd.ministry || ''; 
+           if (xwd.occupation) famToggleMinistry(xwEls[xw].querySelector('.xw-occupation'));
       }
 sv('.f-husbandName', f.husbandName); sv('.f-husbandSurname', f.husbandSurname);
       sv('.f-husbandBirth', f.husbandBirth); sv('.f-husbandEducation', f.husbandEducation);
@@ -1553,6 +1555,7 @@ if (f.husbandMinistry) famToggleMinistry(b.querySelector('.f-husbandOccupation')
         smv('.m-mother', md.mother); smv('.m-birth', md.birth);
         smv('.m-education', md.education); smv('.m-occupation', md.occupation);
            smv('.m-ministry', md.ministry);
+           if (md.occupation) famToggleMinistry(mb.querySelector('.m-occupation'));
         if (md.parentStatus && md.parentStatus.length) {
           var cbs = mb.querySelectorAll('.ps-cb');
           for (var c = 0; c < cbs.length; c++) cbs[c].checked = md.parentStatus.indexOf(cbs[c].getAttribute('data-ps')) !== -1;
@@ -1765,7 +1768,7 @@ function buildRecordPrintHTML(rec, foot){
         html += '</tbody></table>';
       }
       if (f.members && f.members.length) {
-        html += '<table class="print-table"><thead><tr><th>#</th><th>الاسم</th><th>اللقب</th><th>القرابة</th><th>العمر</th><th>الأم</th><th>التولد</th><th>الدراسة</th><th>العمل</th><th>حالة الوالدين</th></tr></thead><tbody>';
+        html += '<table class="print-table"><thead><tr><th>#</th><th>الاسم</th><th>اللقب</th><th>القرابة</th><th>العمر</th><th>الأم</th><th>التولد</th><th>الدراسة</th><th>العمل</th><th>الوزارة</th><th>حالة الوالدين</th></tr></thead><tbody>';
         for (var mi = 0; mi < f.members.length; mi++) {
           var m = f.members[mi];
           var ps = (m.parentStatus || []).map(parentStatusLabel).join('، ') || '—';
