@@ -730,6 +730,7 @@ function buildMinistryFieldHTML(cls, val, occ){
 }
 
 function famToggleMinistry(occSel){
+     if (!occSel) return;
   var parentField = occSel.closest('.field');
   if (!parentField) return;
   var mf = parentField.nextElementSibling;
@@ -1493,7 +1494,7 @@ function loadRecord(id){
       sv('.f-headBirth', f.headBirth); sv('.f-headPhone', f.headPhone);
       sv('.f-headEducation', f.headEducation); sv('.f-headOccupation', f.headOccupation);
          sv('.f-headMinistry', f.headMinistry);
-if (f.headMinistry) famToggleMinistry(b.querySelector('.f-headOccupation'));
+if (f.headOccupation) famToggleMinistry(b.querySelector('.f-headOccupation'));
       sv('.f-headGender', f.headGender);
       var mg = b.querySelector('.f-headMarital');
       famSetMaritalOptions(mg, f.headGender);
@@ -1531,7 +1532,7 @@ sv('.f-husbandName', f.husbandName); sv('.f-husbandSurname', f.husbandSurname);
       sv('.f-husbandBirth', f.husbandBirth); sv('.f-husbandEducation', f.husbandEducation);
       sv('.f-husbandOccupation', f.husbandOccupation); sv('.f-husbandPhone', f.husbandPhone);
          sv('.f-husbandMinistry', f.husbandMinistry);
-if (f.husbandMinistry) famToggleMinistry(b.querySelector('.f-husbandOccupation'));
+if (f.husbandOccpuation) famToggleMinistry(b.querySelector('.f-husbandOccupation'));
       var xhc = b.querySelector('.f-exHusbandCount');
       if (xhc) xhc.value = (f.exHusbands && f.exHusbands.length) || 0;
       famGenExHusbands(xhc);
