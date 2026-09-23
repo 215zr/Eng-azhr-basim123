@@ -2000,7 +2000,11 @@ var _pendingPrintHTML='';
 function showPrintPreview(html){_pendingPrintHTML=html;var pb=document.getElementById('printPreviewContent');var pa=document.getElementById('printArea');if(pb)pb.innerHTML=html;if(pa)pa.innerHTML=html;openModal('printPreviewModal');}
 function confirmPrint(){
   var pa = document.getElementById('printArea');
-  if (!pa) return;
+  
+  if (!pa || !pa.innerHTML || pa.innerHTML.trim() === '') {
+    showToast('لا يوجد محتوى للطباعة', 'error');
+    return;
+  }
   
   if (!window.html2pdf) {
     showToast('المكتبة غير محملة', 'error');
@@ -2011,15 +2015,22 @@ function confirmPrint(){
   var name = 'azhar-' + new Date().toISOString().slice(0,10) + '-' + Date.now() + '.pdf';
   showToast('⏳ جاري تجهيز PDF...');
   
+  // احفظ النمط الأصلي
   var oldStyle = pa.getAttribute('style') || '';
+  var oldInline = pa.style.cssText;
+  
+  // اجعل printArea مرئياً - في مقدمة الشاشة مؤقتاً
   pa.style.display = 'block';
   pa.style.position = 'fixed';
-  pa.style.left = '-99999px';
+  pa.style.left = '0';
   pa.style.top = '0';
   pa.style.width = '210mm';
+  pa.style.minHeight = '297mm';
   pa.style.background = '#ffffff';
   pa.style.padding = '10mm';
   pa.style.boxSizing = 'border-box';
+  pa.style.zIndex = '999999';
+  pa.style.overflow = 'visible';
   
   setTimeout(function(){
     html2pdf().set({
@@ -2030,19 +2041,21 @@ function confirmPrint(){
         scale: 2,
         useCORS: true,
         backgroundColor: '#ffffff',
-        windowWidth: pa.scrollWidth,
-        windowHeight: pa.scrollHeight
+        logging: false,
+        scrollX: 0,
+        scrollY: 0
       },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak: { mode: ['css', 'legacy'] }
     }).from(pa).save().then(function(){
       showToast('📥 تم حفظ PDF بنجاح');
       pa.setAttribute('style', oldStyle);
-    }).catch(function(){
+    }).catch(function(err){
+      console.error('PDF Error:', err);
       showToast('تعذّر إنشاء PDF', 'error');
       pa.setAttribute('style', oldStyle);
     });
-  }, 150);
+  }, 500);
 }
 function downloadPDF(){
   var pa = document.getElementById('printArea');
