@@ -2003,45 +2003,82 @@ function printSingleRecord(id){var r=null;for(var i=0;i<records.length;i++)if(re
 var _pendingPrintHTML='';
 function showPrintPreview(html){_pendingPrintHTML=html;var pb=document.getElementById('printPreviewContent');var pa=document.getElementById('printArea');if(pb)pb.innerHTML=html;if(pa)pa.innerHTML=html;openModal('printPreviewModal');}
 function confirmPrint(){
+function confirmPrint(){
   var pa = document.getElementById('printArea');
-  if (!pa || !window.html2pdf) {
-    showToast('خطأ: printArea أو المكتبة غير متوفر', 'error');
+  if (!pa) {
+    showToast('printArea غير موجود', 'error');
+    return;
+  }
+  
+  var len = (pa.innerHTML || '').length;
+  if (len < 100) {
+    showToast('المحتوى فارغ (' + len + ' حرف)', 'error');
+    return;
+  }
+  
+  if (!window.html2pdf) {
+    showToast('المكتبة غير محملة', 'error');
     return;
   }
   
   closeModal('printPreviewModal');
-  var name = 'azhar-' + new Date().toISOString().slice(0,10) + '-' + Date.now() + '.pdf';
-  showToast('⏳ جاري تجهيز PDF...');
+  showToast('⏳ المحتوى: ' + len + ' حرف، جاري التجهيز...');
   
-  // فعّل الصنف المؤقت
-  pa.classList.add('active-for-pdf');
+  // حفظ النمط الأصلي
+  var oldStyle = pa.getAttribute('style') || '';
+  
+  // فرض النمط بـ inline + !important (أقوى من CSS)
+  pa.setAttribute('style',
+    'display:block !important;' +
+    'visibility:visible !important;' +
+    'position:fixed !important;' +
+    'left:0 !important;' +
+    'top:0 !important;' +
+    'width:210mm !important;' +
+    'min-height:297mm !important;' +
+    'background:#ffffff !important;' +
+    'color:#000000 !important;' +
+    'padding:10mm !important;' +
+    'box-sizing:border-box !important;' +
+    'z-index:9999999 !important;' +
+    'opacity:1 !important;' +
+    'overflow:visible !important;'
+  );
+  
+  // إجبار جميع العناصر الداخلية على أن تكون مرئية
+  var pages = pa.querySelectorAll('.print-page');
+  for (var i = 0; i < pages.length; i++) {
+    pages[i].style.cssText += 'display:block !important;visibility:visible !important;opacity:1 !important;min-height:auto !important;background:#ffffff !important;color:#000000 !important;';
+  }
   
   setTimeout(function(){
     html2pdf().set({
       margin: 0,
-      filename: name,
-      image: { type: 'jpeg', quality: 0.98 },
+      filename: 'azhar-' + new Date().toISOString().slice(0,10) + '-' + Date.now() + '.pdf',
+      image: { type: 'jpeg', quality: 0.95 },
       html2canvas: {
         scale: 2,
         useCORS: true,
         backgroundColor: '#ffffff',
-        logging: false,
-        scrollX: 0,
-        scrollY: 0,
+        logging: true,
+        width: pa.scrollWidth,
+        height: pa.scrollHeight,
         windowWidth: pa.scrollWidth,
-        windowHeight: pa.scrollHeight
+        windowHeight: pa.scrollHeight,
+        scrollX: 0,
+        scrollY: 0
       },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak: { mode: ['css', 'legacy'] }
     }).from(pa).save().then(function(){
       showToast('📥 تم حفظ PDF بنجاح');
-      pa.classList.remove('active-for-pdf');
+      pa.setAttribute('style', oldStyle);
     }).catch(function(err){
       console.error('PDF Error:', err);
       showToast('فشل: ' + (err.message || err), 'error');
-      pa.classList.remove('active-for-pdf');
+      pa.setAttribute('style', oldStyle);
     });
-  }, 500);
+  }, 1000);
 }
 function downloadPDF(){
   var pa = document.getElementById('printArea');
