@@ -123,19 +123,23 @@ footer{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,
 .warning-box li{color:#fecaca;margin-bottom:3px}
 @media print{body{background:#fff!important;color:#000!important;padding:0!important}.bg-pattern,header,.container,footer,.modal-overlay,.toast,.progress-bar,.lock-overlay{display:none!important}#printArea{display:block!important}}
 #printArea{display:none}
+#printArea{display:none}
+#printArea.active-for-pdf{
+  display:block !important;
+  position:fixed !important;
+  left:0 !important;
+  top:0 !important;
+  width:210mm !important;
+  background:#ffffff !important;
+  padding:10mm !important;
+  box-sizing:border-box !important;
+  z-index:999999 !important;
+}
 #printArea .print-page{width:100% !important;min-height:auto !important;box-sizing:border-box;page-break-after:always;padding:5mm}
 #printArea .print-page:last-child{page-break-after:auto}
-#printArea .print-header{padding-bottom:6px;margin-bottom:10px}
-#printArea .print-header h1{font-size:16px}
-#printArea .print-header h2{font-size:12px}
-#printArea .print-section{margin-bottom:8px;padding:6px 8px}
-#printArea .print-section h3{font-size:11px;margin-bottom:4px}
-#printArea .print-row{font-size:9px;gap:4px}
-#printArea .print-row .item{min-width:44%;word-break:break-word;overflow-wrap:break-word}
-#printArea .print-table{table-layout:fixed;font-size:8px;width:100%}
-#printArea .print-table th,#printArea .print-table td{padding:2px 3px;word-break:break-word;overflow:hidden;text-overflow:ellipsis;font-size:8px}
-#printArea .print-footer{font-size:9px;margin-top:10px;padding-top:6px}
-#printArea .print-meta{font-size:8px;margin-top:3px}
+#printArea .print-table{table-layout:fixed;font-size:9px}
+#printArea .print-table th,#printArea .print-table td{padding:2px 3px;word-break:break-word;overflow:hidden;text-overflow:ellipsis}
+#printArea .print-row .item{word-break:break-word;overflow-wrap:break-word}
 .print-page{page-break-after:always;padding:20px;font-family:'Cairo',Tahoma,Arial,sans-serif;color:#000;background:#fff;direction:rtl;min-height:100vh}
 .print-page:last-child{page-break-after:auto}
 .print-header{text-align:center;border-bottom:3px double #d4a017;padding-bottom:10px;margin-bottom:15px}
@@ -2000,14 +2004,8 @@ var _pendingPrintHTML='';
 function showPrintPreview(html){_pendingPrintHTML=html;var pb=document.getElementById('printPreviewContent');var pa=document.getElementById('printArea');if(pb)pb.innerHTML=html;if(pa)pa.innerHTML=html;openModal('printPreviewModal');}
 function confirmPrint(){
   var pa = document.getElementById('printArea');
-  
-  if (!pa || !pa.innerHTML || pa.innerHTML.trim() === '') {
-    showToast('لا يوجد محتوى للطباعة', 'error');
-    return;
-  }
-  
-  if (!window.html2pdf) {
-    showToast('المكتبة غير محملة', 'error');
+  if (!pa || !window.html2pdf) {
+    showToast('خطأ: printArea أو المكتبة غير متوفر', 'error');
     return;
   }
   
@@ -2015,22 +2013,8 @@ function confirmPrint(){
   var name = 'azhar-' + new Date().toISOString().slice(0,10) + '-' + Date.now() + '.pdf';
   showToast('⏳ جاري تجهيز PDF...');
   
-  // احفظ النمط الأصلي
-  var oldStyle = pa.getAttribute('style') || '';
-  var oldInline = pa.style.cssText;
-  
-  // اجعل printArea مرئياً - في مقدمة الشاشة مؤقتاً
-  pa.style.display = 'block';
-  pa.style.position = 'fixed';
-  pa.style.left = '0';
-  pa.style.top = '0';
-  pa.style.width = '210mm';
-  pa.style.minHeight = '297mm';
-  pa.style.background = '#ffffff';
-  pa.style.padding = '10mm';
-  pa.style.boxSizing = 'border-box';
-  pa.style.zIndex = '999999';
-  pa.style.overflow = 'visible';
+  // فعّل الصنف المؤقت
+  pa.classList.add('active-for-pdf');
   
   setTimeout(function(){
     html2pdf().set({
@@ -2043,17 +2027,19 @@ function confirmPrint(){
         backgroundColor: '#ffffff',
         logging: false,
         scrollX: 0,
-        scrollY: 0
+        scrollY: 0,
+        windowWidth: pa.scrollWidth,
+        windowHeight: pa.scrollHeight
       },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak: { mode: ['css', 'legacy'] }
     }).from(pa).save().then(function(){
       showToast('📥 تم حفظ PDF بنجاح');
-      pa.setAttribute('style', oldStyle);
+      pa.classList.remove('active-for-pdf');
     }).catch(function(err){
       console.error('PDF Error:', err);
-      showToast('تعذّر إنشاء PDF', 'error');
-      pa.setAttribute('style', oldStyle);
+      showToast('فشل: ' + (err.message || err), 'error');
+      pa.classList.remove('active-for-pdf');
     });
   }, 500);
 }
